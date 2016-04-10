@@ -5,8 +5,8 @@ import {HomeComponent} from '../home/HomeComponent'
 import {AboutComponent} from '../about/AboutComponent'
 
 @RouteConfig([
-    {path: '/', component: HomeComponent, as: 'Home'},
-    {path: '/about', component: AboutComponent, as: 'About'},
+    {path: 'app/', component: HomeComponent, as: 'Home'},
+    {path: 'app/about', component: AboutComponent, as: 'About'},
 ])
 @Component({
     selector: 'my-app',

@@ -11,6 +11,19 @@ gulp.task('clean', function(){
     return del('dist')
 });
 
+/*gulp.task('move-models',function(){
+    return gulp.src(['server/models/bear.js'], {base: './models/'})
+    .pipe(gulp.dest('dist'));
+
+});*/ 
+
+gulp.task('move-models',function(){
+    return gulp.src('server/models/bear.js')  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+    .pipe(gulp.dest('dist/models'));
+
+});
+
+
 gulp.task('build:server', function () {
 	var tsProject = ts.createProject('server/tsconfig.json');
     var tsResult = gulp.src('server/**/*.ts')
@@ -61,7 +74,7 @@ gulp.task('build:app', function(){
 
 
 gulp.task('build', function(callback){
-    runSequence('clean', 'build:server', 'build:index', 'build:app', callback);
+    runSequence('clean','move-models','build:server', 'build:index', 'build:app', callback);
 });
 
 gulp.task('default', ['build']);
