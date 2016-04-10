@@ -10,11 +10,27 @@ var Bear = require('./models/bear');  // I think this needs to be configured in 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
 
-/*var renderIndex = (req: express.Request, res: express.Response) => {
-    res.sendFile(path.resolve(__dirname, 'index.html'));
-}
 
-app.get('/*', renderIndex);*/
+var dbstring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://heroku_cb2ahb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2ahb6wm';
+
+var server = app.listen(port, function() {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('This express app is listening on port:' + port);
+});
+
+mongoose.connect(dbstring, function (err, res) {
+      if (err) {
+      console.log ('ERROR connecting to: ' + dbstring + '. ' + err);
+      } else {
+      console.log ('Successfully connected to: ' + dbstring);
+      };
+});
+
+
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,7 +46,7 @@ router.get('/api', function(req, res) {
    res.json({ message: 'hooray! welcome to our api!' });
 });
 
-router.route('/api/bears')
+router.route('/api/bears')          //while posting pass name=value in parameter body. No space.
     .post(function(req, res) {        
         var bear = new Bear();
         bear.name = req.body.name;
@@ -57,27 +73,33 @@ router.route('/api/bears')
                 res.send(err);
             res.json(bear);
         });
-    });
+    })
 
+    .put(function(req, res) {
+        Bear.findById(req.params.bear_id, function(err, bear) {
+            if (err)
+                res.send(err);
+            bear.name = req.body.name;  
+            bear.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'Bear updated!' });
+            });
+        });
+    })
+
+    .delete(function(req, res) {
+        Bear.remove({
+            _id: req.params.bear_id
+        }, function(err, bear) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
 
 app.use('/', router);
 
 
-var dbstring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://heroku_cb2ahb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2ahb6wm';
 
-var server = app.listen(port, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('This express app is listening on port:' + port);
-});
-
-mongoose.connect(dbstring, function (err, res) {
-      if (err) {
-      console.log ('ERROR connecting to: ' + dbstring + '. ' + err);
-      } else {
-      console.log ('Successfully connected to: ' + dbstring);
-      };
-});
