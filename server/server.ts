@@ -30,9 +30,6 @@ mongoose.connect(dbstring, function (err, res) {
       };
 });
 
-
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
