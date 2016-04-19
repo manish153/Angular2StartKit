@@ -18,10 +18,22 @@ gulp.task('clean', function(){
 });*/ 
 
 gulp.task('move-models',function(){
-    return gulp.src('server/models/bear.js')  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+    return gulp.src('server/models/bear.js')  //to move multiple files with fodler structure use 'base' property. check css move for syntax
     .pipe(gulp.dest('dist/models'));
 
 });
+
+gulp.task('move-css',function(){
+    return gulp.src(['client/app/assets/app.css','client/app/assets/app2.css','client/app/assets/light-bootstrap-dashboard.css','client/app/assets/demo.css','client/app/assets/pe-icon-7-stroke.css','client/app/assets/bootstrap.min.css'],{base: 'client/'})  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('move-template',function(){
+    return gulp.src('client/app/templates/*')  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+    .pipe(gulp.dest('dist/app/templates'));
+});
+
+
 
 
 gulp.task('build:server', function () {
@@ -74,7 +86,7 @@ gulp.task('build:app', function(){
 
 
 gulp.task('build', function(callback){
-    runSequence('clean','move-models','build:server', 'build:index', 'build:app', callback);
+    runSequence('clean','move-models','move-template','move-css','build:server', 'build:index', 'build:app', callback);
 });
 
 gulp.task('default', ['build']);

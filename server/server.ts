@@ -14,7 +14,7 @@ app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
 var dbstring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    'mongodb://heroku_cb2ahb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2ahb6wm';
+    'mongodb://heroku_cb2hb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2hb6wm';
 
 var server = app.listen(port, function() {
     var host = server.address().address;

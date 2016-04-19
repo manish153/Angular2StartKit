@@ -4,7 +4,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
     selector: 'home',
-    template: `
+/*    template: `
     <div>
     <div class="input">
         <label for="Name">Name</label>
@@ -15,7 +15,9 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
     <p>Response: {{response}}</p>
     </div>
     <a [routerLink]="['../About']">link to About component</a>
-    `,
+    `,*/
+    templateUrl: '../app/templates/dashboard.html',
+    styleUrls: ['../app/assets/light-bootstrap-dashboard.css','../app/assets/demo.css','../app/assets/pe-icon-7-stroke.css','../app/assets/bootstrap.min.css'],
     directives : [ROUTER_DIRECTIVES]
 })
 

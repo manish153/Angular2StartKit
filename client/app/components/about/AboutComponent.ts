@@ -1,11 +1,23 @@
 import {Component, OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {HomeComponent} from "../home/HomeComponent";
+import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 
 
 @Component({
     selector: 'about',
-    template: `<h1>About</h1>
+    styleUrls: ['../app/assets/app.css'],
+    template: `<h1>About Form</h1>
+    <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
+    <div>
+        <label from="name">Name</label>
+        <input [ngFormControl]="myForm.controls['name'] "type="text" id="name" #name="ngForm">
+        <span class="validator-error" *ngIf="!name.valid"> required</span>
+    </div>
+    <button type="submit" [disabled]="!f.valid">submit</button>
+    </form>
+
+
     <a [routerLink]="['../Home']">Back to Home component</a>
 
     `,
@@ -13,8 +25,18 @@ import {HomeComponent} from "../home/HomeComponent";
 })
 
 export class AboutComponent implements OnInit {
+    myForm: ControlGroup;
 
-    constructor() { }
+    constructor(private fb: FormBuilder) { }
 
-    ngOnInit() { }
+
+    onSubmit(form){
+       console.log(this.myForm);
+    }
+
+    ngOnInit():any { 
+     this.myForm = this.fb.group({
+       'name': ['', Validators.required],
+     });
+    }
 }
