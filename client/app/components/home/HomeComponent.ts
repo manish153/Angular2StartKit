@@ -1,6 +1,8 @@
 import {Component, OnInit} from 'angular2/core';
 import {AboutComponent} from "../about/AboutComponent";
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES,CanActivate} from "angular2/router";
+
+import {LoginComponent} from '../login/LoginComponent'
 
 @Component({
     selector: 'home',
@@ -21,6 +23,7 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
     directives : [ROUTER_DIRECTIVES]
 })
 
+@CanActivate(() => LoginComponent.loggedIn())
 export class HomeComponent implements OnInit {
     response: string;
 

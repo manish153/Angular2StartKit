@@ -10,6 +10,10 @@
     <script src="libs/rxjs/bundles/Rx.js"></script>
     <script src="libs/angular2/bundles/angular2.dev.js"></script>
     <script src="libs/angular2/bundles/router.dev.js"></script>
+    <script src="//cdn.auth0.com/js/lock-9.0.min.js"></script>
+    <script src="libs/angular2/bundles/http.dev.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
 
     <!-- 2. Configure SystemJS -->
     <script>
@@ -18,7 +22,10 @@
           app: {
             format: 'register',
             defaultExtension: 'js'
-          }
+          } 
+        } ,
+        map: {
+          "angular2-jwt": "libs/angular2-jwt/angular2-jwt.js"
         }
       });
       System.import('app/bootstrap')

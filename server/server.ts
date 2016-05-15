@@ -4,11 +4,15 @@ var port: number = process.env.PORT || 3000;
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var jwt = require('express-jwt');
+var cors = require('cors');
 
-var Bear = require('./models/bear');  // I think this needs to be configured in gulp to export the models to dist folder. note sure.
+var Bear = require('./models/bear'); 
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
+app.use(cors());
+
 
 
 var dbstring =
@@ -21,6 +25,13 @@ var server = app.listen(port, function() {
     var port = server.address().port;
     console.log('This express app is listening on port:' + port);
 });
+
+var authCheck = jwt({
+  secret: new Buffer('460DPY7Pi4xnRUiirPuEfBdxS4wzQGcx8rlA-Qw76fURkmiwtrhv_IXffzsI84HM', 'base64'),
+  audience: '1mvHGykVHvxzpwstp2wTmrzLrpzouVTm'
+});
+
+
 
 mongoose.connect(dbstring, function (err, res) {
       if (err) {
@@ -39,7 +50,7 @@ router.get('/app/*', function(req, res) {
    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
 
-router.get('/api', function(req, res) {
+router.get('/api',authCheck, function(req, res) {
    res.json({ message: 'hooray! welcome to our api!' });
 });
 
