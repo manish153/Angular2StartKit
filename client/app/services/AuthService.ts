@@ -1,5 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {ROUTER_DIRECTIVES, Router} from "angular2/router";
+import {tokenNotExpired} from 'angular2-jwt';
 
 declare var Auth0Lock: any;
 
@@ -20,7 +21,7 @@ constructor(private router: Router) {}
 
      localStorage.setItem('profile', JSON.stringify(profile));
      localStorage.setItem('id_token', id_token);
-     this.router.navigate(['Home']);
+     this.router.navigate(['Dashboard']);
      
     });
  }
@@ -29,4 +30,10 @@ constructor(private router: Router) {}
    localStorage.removeItem('profile');
    localStorage.removeItem('id_token');
  }
+
+ loggedIn() {
+    return tokenNotExpired();
+  }
+
+ 
 }

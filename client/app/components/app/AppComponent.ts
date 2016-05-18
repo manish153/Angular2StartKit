@@ -10,7 +10,8 @@ import {LoginComponent} from '../login/LoginComponent'
 import {AuthService} from '../../services/AuthService'
 import {SidebarComponent} from './SidebarComponent'
 import {DashboardComponent} from './DashboardComponent'
-import {MDL} from './MaterialDesignLiteUpgradeElement';
+import {MDL} from './MaterialDesignLiteUpgradeElement'
+import {AuthRouterOutlet} from './AuthRouterOutlet'
 
 
 @RouteConfig([
@@ -18,7 +19,7 @@ import {MDL} from './MaterialDesignLiteUpgradeElement';
     {path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard'},
     {path: 'app/about', component: AboutComponent, as: 'About'},    
     {path: 'app/login', component: LoginComponent, as: 'Login'},
-    {path: 'app/*', redirectTo: ['Login']}   // this redirect is not working for some reason
+    {path: 'app/**', redirectTo: ['Login']}   // this redirect is not working for some reason
 ])
 @Component({
     selector: 'my-app',
@@ -31,7 +32,8 @@ import {MDL} from './MaterialDesignLiteUpgradeElement';
       </app-sidebar>
       <main class="mdl-layout__content mdl-color--grey-100">
          
-          <router-outlet></router-outlet>
+         <auth-router-outlet></auth-router-outlet>
+
          
       </main>
     </div>
@@ -88,12 +90,11 @@ import {MDL} from './MaterialDesignLiteUpgradeElement';
 
     `, 
     /*styleUrls: ['../app/assets/styles.css'], */
-    directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent,MDL],
+    directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent,MDL,AuthRouterOutlet],
     providers: [AUTH_PROVIDERS,AuthService]
 })
 
 
-@CanActivate(() => LoginComponent.loggedIn())
 export class AppComponent { 
 
   constructor() {}
