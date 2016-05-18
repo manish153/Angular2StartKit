@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {MDL} from './MaterialDesignLiteUpgradeElement';
 
 
 @Component({
@@ -27,7 +28,8 @@ import {Component} from 'angular2/core';
             <li class="mdl-menu__item">Legal information</li>
           </ul>
         </div>
-    `
+    `,
+  /*  directives: [ MDL ]*/
 })
 
 export class HeaderComponent { 

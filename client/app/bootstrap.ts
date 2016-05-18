@@ -5,7 +5,9 @@ import {ROUTER_BINDINGS, ROUTER_PROVIDERS, LocationStrategy, PathLocationStrateg
 import {HTTP_PROVIDERS} from 'angular2/http'
 
 import {AppComponent} from './components/app/AppComponent'
+
 bootstrap(AppComponent, [
+
     ROUTER_PROVIDERS,
     CORE_DIRECTIVES,
     HTTP_PROVIDERS,

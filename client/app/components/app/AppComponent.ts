@@ -10,6 +10,7 @@ import {LoginComponent} from '../login/LoginComponent'
 import {AuthService} from '../../services/AuthService'
 import {SidebarComponent} from './SidebarComponent'
 import {DashboardComponent} from './DashboardComponent'
+import {MDL} from './MaterialDesignLiteUpgradeElement';
 
 
 @RouteConfig([
@@ -25,7 +26,7 @@ import {DashboardComponent} from './DashboardComponent'
    template: `
     <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <app-header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600"></app-header>
+      <app-header mdl class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600"></app-header>
       <app-sidebar class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
       </app-sidebar>
       <main class="mdl-layout__content mdl-color--grey-100">
@@ -87,7 +88,7 @@ import {DashboardComponent} from './DashboardComponent'
 
     `, 
     /*styleUrls: ['../app/assets/styles.css'], */
-    directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent],
+    directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent,MDL],
     providers: [AUTH_PROVIDERS,AuthService]
 })
 
