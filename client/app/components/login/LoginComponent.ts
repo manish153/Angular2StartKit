@@ -8,7 +8,7 @@ import {AuthService} from '../../services/AuthService'
 
 @Component({
     selector: 'protected',
-    template: '<router-outlet></router-outlet>',
+    template: '',
     directives: [ROUTER_DIRECTIVES],
     providers: [AUTH_PROVIDERS,AuthService]
 })

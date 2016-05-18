@@ -24,7 +24,7 @@ gulp.task('move-models',function(){
 });
 
 gulp.task('move-css',function(){
-    return gulp.src(['client/app/assets/app.css','client/app/assets/app2.css','client/app/assets/light-bootstrap-dashboard.css','client/app/assets/demo.css','client/app/assets/pe-icon-7-stroke.css','client/app/assets/bootstrap.min.css'],{base: 'client/'})  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+    return gulp.src(['client/app/assets/app.css','client/app/assets/app2.css','client/app/assets/light-bootstrap-dashboard.css','client/app/assets/demo.css','client/app/assets/pe-icon-7-stroke.css','client/app/assets/bootstrap.min.css','client/app/assets/styles.css','client/app/assets/images/*'],{base: 'client/'})  //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
     .pipe(gulp.dest('dist'));
 });
 

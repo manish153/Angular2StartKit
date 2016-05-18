@@ -18,12 +18,12 @@ import {LoginComponent} from '../login/LoginComponent'
     </div>
     <a [routerLink]="['../About']">link to About component</a>
     `,*/
-    templateUrl: '../app/templates/dashboard.html',
-    styleUrls: ['../app/assets/light-bootstrap-dashboard.css','../app/assets/demo.css','../app/assets/pe-icon-7-stroke.css','../app/assets/bootstrap.min.css'],
+    templateUrl: '../app/templates/home.html',
+    
+    /*styleUrls: ['../app/assets/light-bootstrap-dashboard.css','../app/assets/demo.css','../app/assets/pe-icon-7-stroke.css','../app/assets/bootstrap.min.css'],*/
     directives : [ROUTER_DIRECTIVES]
 })
 
-@CanActivate(() => LoginComponent.loggedIn())
 export class HomeComponent implements OnInit {
     response: string;
 
