@@ -10,7 +10,7 @@ import {AuthService} from '../../services/AuthService'
     selector: 'protected',
     template: '',
     directives: [ROUTER_DIRECTIVES],
-    providers: [AUTH_PROVIDERS,AuthService]
+    providers: [AUTH_PROVIDERS]
 })
 
 export class LoginComponent { 

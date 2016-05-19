@@ -7,7 +7,7 @@ import {Router, RouterOutlet, ComponentInstruction} from "angular2/router";
 })
 export class AuthRouterOutlet extends RouterOutlet {
     private _protectedRoutes = {
-        'app/*': true,
+        'app/**': true,
         'app/home': true,
         'app/dashboard': true,
         'app/about': true
@@ -18,8 +18,6 @@ export class AuthRouterOutlet extends RouterOutlet {
     }
 
     activate(nextInstruction: ComponentInstruction): Promise<any> {
-
-    console.log(nextInstruction);
         if (this._protectedRoutes[nextInstruction.urlPath]) {        
             if (!this._authService.loggedIn()) {
                 this._router.navigate(['Login']);

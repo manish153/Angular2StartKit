@@ -26,12 +26,17 @@ import {LoginComponent} from '../login/LoginComponent'
 
 export class HomeComponent implements OnInit {
     response: string;
-
-    constructor() {}
+    sidebartemp1 = JSON.parse(localStorage.getItem('profile'));
+    
+    constructor() {
+    }
 
     ngOnInit() {}
 
     onGetAll(name: string){
        console.log("Button clicked.. more code goes here " + name);  
     }
+
+
+
 }

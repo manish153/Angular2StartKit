@@ -19,14 +19,14 @@ import {AuthRouterOutlet} from './AuthRouterOutlet'
     {path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard'},
     {path: 'app/about', component: AboutComponent, as: 'About'},    
     {path: 'app/login', component: LoginComponent, as: 'Login'},
-    {path: 'app/**', redirectTo: ['Login']}   // this redirect is not working for some reason
+    {path: 'app/**', redirectTo: ['Dashboard']}   // this redirect is not working for some reason
 ])
 @Component({
     selector: 'my-app',
     /*template: '<router-outlet></router-outlet>',*/
    template: `
     <body>
-    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <div mdl class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <app-header mdl class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600"></app-header>
       <app-sidebar class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
       </app-sidebar>

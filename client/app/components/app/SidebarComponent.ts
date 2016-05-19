@@ -2,6 +2,8 @@ import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES,CanActivate} from 'angular2/router';
 import {HomeComponent} from '../home/HomeComponent'
 import {DashboardComponent} from './DashboardComponent'
+import {AuthService} from '../../services/AuthService'
+
 
 @Component({
     selector: 'app-sidebar',
@@ -9,7 +11,7 @@ import {DashboardComponent} from './DashboardComponent'
       <header class="demo-drawer-header">
           <img src="../app/assets/images/user.jpg" class="demo-avatar">
           <div class="demo-avatar-dropdown">
-            <span>hello@example.com</span>
+            <span>{{user.email}}</span>
             <div class="mdl-layout-spacer"></div>
             <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
               <i class="material-icons" role="presentation">arrow_drop_down</i>
@@ -24,13 +26,13 @@ import {DashboardComponent} from './DashboardComponent'
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           
-          <a class="mdl-navigation__link" [routerLink]="['./Dashboard']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+          <a class="mdl-navigation__link" [routerLink]="['./Dashboard']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a>
           
 
-
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">inbox</i>Inbox</a>
+          <a class="mdl-navigation__link" [routerLink]="['./Home']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Tasks</a>
 
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
+
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
@@ -47,6 +49,13 @@ import {DashboardComponent} from './DashboardComponent'
 
 export class SidebarComponent { 
 
-  constructor() {}
+  user = JSON.parse(localStorage.getItem('profile'));  
+  
+   
+  constructor(private service:AuthService) {
+  this.user = this.service.profileUpdated$.subscribe(profile => { 
+      this.user = profile;
+  });
+  }
   
 }
