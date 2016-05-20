@@ -7,7 +7,7 @@ import {MDL} from './MaterialDesignLiteUpgradeElement';
     /*template: '<router-outlet></router-outlet>',*/
     template: `
     <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title">Home</span>
+          <span class="mdl-layout-title">Angular Application</span>
           <div class="mdl-layout-spacer"></div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
             <label class="mdl-button mdl-js-button mdl-button--icon" for="search">

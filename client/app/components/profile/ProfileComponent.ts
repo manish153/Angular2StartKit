@@ -5,10 +5,9 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 
 
 @Component({
-    selector: 'about',
+    selector: 'profile',
     styleUrls: ['../app/assets/app.css'],
-    template: ` <h1>You have successfully logged out</h1>
-    <h3>About Form</h3>
+    template: `<h1>Profile Page - work in progress </h1>
     <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
     <div>
         <label from="name">Name</label>
@@ -25,7 +24,7 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     directives : [ROUTER_DIRECTIVES]
 })
 
-export class AboutComponent implements OnInit {
+export class ProfileComponent implements OnInit {
     myForm: ControlGroup;
 
     constructor(private fb: FormBuilder) { }

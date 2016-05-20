@@ -12,6 +12,7 @@ import {SidebarComponent} from './SidebarComponent'
 import {DashboardComponent} from './DashboardComponent'
 import {MDL} from './MaterialDesignLiteUpgradeElement'
 import {AuthRouterOutlet} from './AuthRouterOutlet'
+import {ProfileComponent} from '../profile/ProfileComponent'
 
 
 @RouteConfig([
@@ -19,7 +20,8 @@ import {AuthRouterOutlet} from './AuthRouterOutlet'
     {path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard'},
     {path: 'app/about', component: AboutComponent, as: 'About'},    
     {path: 'app/login', component: LoginComponent, as: 'Login'},
-    {path: 'app/**', redirectTo: ['Dashboard']}   // this redirect is not working for some reason
+    {path: 'app/profile', component: ProfileComponent, as: 'Profile'},
+    {path: 'app/**', redirectTo: ['Dashboard']}  
 ])
 @Component({
     selector: 'my-app',
@@ -91,7 +93,7 @@ import {AuthRouterOutlet} from './AuthRouterOutlet'
     `, 
     /*styleUrls: ['../app/assets/styles.css'], */
     directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent,MDL,AuthRouterOutlet],
-    providers: [AUTH_PROVIDERS,AuthService]
+    providers: [AUTH_PROVIDERS]
 })
 
 

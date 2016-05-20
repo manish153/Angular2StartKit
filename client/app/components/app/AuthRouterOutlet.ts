@@ -10,7 +10,7 @@ export class AuthRouterOutlet extends RouterOutlet {
         'app/**': true,
         'app/home': true,
         'app/dashboard': true,
-        'app/about': true
+        'app/about': false
     };
 
     constructor(_elementRef: ElementRef, _loader: DynamicComponentLoader, private _router: Router, nameAttr: string, private _authService: AuthService) {

@@ -37,8 +37,8 @@ constructor(private router: Router,zone: NgZone) {
  logout() {
    localStorage.removeItem('profile');
    localStorage.removeItem('id_token');
-   this.profileUpdated$.next(null);
    this.zoneImpl.run(() => this.user = null);
+   this.router.navigate(['About']);
  }
 
  loggedIn() {
