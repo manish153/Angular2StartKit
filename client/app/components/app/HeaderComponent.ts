@@ -29,11 +29,11 @@ import {MDL} from './MaterialDesignLiteUpgradeElement';
           </ul>
         </div>
     `,
-  /*  directives: [ MDL ]*/
+     /*  directives: [ MDL ]*/
 })
 
-export class HeaderComponent { 
+export class HeaderComponent {
 
-  constructor() {}
-  
+     constructor() { }
+
 }
