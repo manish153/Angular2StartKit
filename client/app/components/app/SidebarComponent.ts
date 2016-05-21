@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES,CanActivate} from 'angular2/router';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
 import {HomeComponent} from '../home/HomeComponent'
 import {DashboardComponent} from './DashboardComponent'
 import {AuthService} from '../../services/AuthService'
@@ -31,10 +31,10 @@ import {AuthService} from '../../services/AuthService'
 
           <a class="mdl-navigation__link" [routerLink]="['./Home']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>Tasks</a>
 
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
+          <a class="mdl-navigation__link" href="" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
 
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Payments</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Apartments</a>
+          <a class="mdl-navigation__link" [routerLink]="['./Apartment']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Apartments</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Residents</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>My Community</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">shopping_cart</i>Purchases</a>
@@ -42,27 +42,27 @@ import {AuthService} from '../../services/AuthService'
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
-    `, 
+    `,
 
-    directives: [ROUTER_DIRECTIVES,DashboardComponent]
+    directives: [ROUTER_DIRECTIVES, DashboardComponent]
 })
 
-export class SidebarComponent { 
+export class SidebarComponent {
 
-  user = JSON.parse(localStorage.getItem('profile'));  
-  
-   
-  constructor(private service:AuthService) {
-  this.user = this.service.profileUpdated$.subscribe(profile => { 
+  user = JSON.parse(localStorage.getItem('profile'));
+
+
+  constructor(private service: AuthService) {
+    this.user = this.service.profileUpdated$.subscribe(profile => {
       this.user = profile;
-   });
+    });
   }
-  
 
-  logout(){  
-  //this.user = this.service.profileUpdated$.subscribe(profile => { 
-  //this.user = profile})
-  this.user = 'user@example.com';
-  this.service.logout();
+
+  logout() {
+    //this.user = this.service.profileUpdated$.subscribe(profile => { 
+    //this.user = profile})
+    this.user = 'user@example.com';
+    this.service.logout();
   }
- } 
+} 

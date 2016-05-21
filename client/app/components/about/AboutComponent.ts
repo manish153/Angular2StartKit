@@ -22,7 +22,7 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     <a [routerLink]="['../Home']">Back to Home component</a>
 
     `,
-    directives : [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class AboutComponent implements OnInit {
@@ -31,13 +31,13 @@ export class AboutComponent implements OnInit {
     constructor(private fb: FormBuilder) { }
 
 
-    onSubmit(form){
-       console.log(this.myForm);
+    onSubmit(form) {
+        console.log(this.myForm);
     }
 
-    ngOnInit():any { 
-     this.myForm = this.fb.group({
-       'name': ['', Validators.required],
-     });
+    ngOnInit(): any {
+        this.myForm = this.fb.group({
+            'name': ['', Validators.required],
+        });
     }
 }

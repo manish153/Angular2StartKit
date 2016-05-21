@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES,CanActivate} from 'angular2/router';
-import {AuthHttp,AuthConfig, tokenNotExpired, AUTH_PROVIDERS} from 'angular2-jwt';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
+import {AuthHttp, AuthConfig, tokenNotExpired, AUTH_PROVIDERS} from 'angular2-jwt';
 
 
 import {HomeComponent} from '../home/HomeComponent'
@@ -13,20 +13,22 @@ import {DashboardComponent} from './DashboardComponent'
 import {MDL} from './MaterialDesignLiteUpgradeElement'
 import {AuthRouterOutlet} from './AuthRouterOutlet'
 import {ProfileComponent} from '../profile/ProfileComponent'
+import {ApartmentComponent} from '../apartment/ApartmentComponent'
 
 
 @RouteConfig([
-    {path: 'app/home', component: HomeComponent, as: 'Home'},
-    {path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard'},
-    {path: 'app/about', component: AboutComponent, as: 'About'},    
-    {path: 'app/login', component: LoginComponent, as: 'Login'},
-    {path: 'app/profile', component: ProfileComponent, as: 'Profile'},
-    {path: 'app/**', redirectTo: ['Dashboard']}  
+    { path: 'app/home', component: HomeComponent, as: 'Home' },
+    { path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard' },
+    { path: 'app/about', component: AboutComponent, as: 'About' },
+    { path: 'app/login', component: LoginComponent, as: 'Login' },
+    { path: 'app/profile', component: ProfileComponent, as: 'Profile' },
+    { path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
+    { path: 'app/**', redirectTo: ['Dashboard'] }
 ])
 @Component({
     selector: 'my-app',
     /*template: '<router-outlet></router-outlet>',*/
-   template: `
+  template: `
     <body>
     <div mdl class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
       <app-header mdl class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600"></app-header>
@@ -90,15 +92,15 @@ import {ProfileComponent} from '../profile/ProfileComponent'
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
   </body>
 
-    `, 
+    `,
     /*styleUrls: ['../app/assets/styles.css'], */
-    directives: [ROUTER_DIRECTIVES,SidebarComponent,HeaderComponent,MDL,AuthRouterOutlet],
+    directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent, MDL, AuthRouterOutlet],
     providers: [AUTH_PROVIDERS]
 })
 
 
-export class AppComponent { 
+export class AppComponent {
 
-  constructor() {}
-  
+  constructor() { }
+
 }

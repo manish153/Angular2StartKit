@@ -10,6 +10,7 @@ export class AuthRouterOutlet extends RouterOutlet {
         'app/**': true,
         'app/home': true,
         'app/dashboard': true,
+        'app/profile': true,
         'app/about': false
     };
 
@@ -18,7 +19,7 @@ export class AuthRouterOutlet extends RouterOutlet {
     }
 
     activate(nextInstruction: ComponentInstruction): Promise<any> {
-        if (this._protectedRoutes[nextInstruction.urlPath]) {        
+        if (this._protectedRoutes[nextInstruction.urlPath]) {
             if (!this._authService.loggedIn()) {
                 this._router.navigate(['Login']);
             }

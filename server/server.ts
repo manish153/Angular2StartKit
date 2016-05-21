@@ -8,6 +8,7 @@ var jwt = require('express-jwt');
 var cors = require('cors');
 
 var Bear = require('./models/bear'); 
+var Apartment = require('./models/apartment'); 
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
@@ -30,8 +31,6 @@ var authCheck = jwt({
   secret: new Buffer('460DPY7Pi4xnRUiirPuEfBdxS4wzQGcx8rlA-Qw76fURkmiwtrhv_IXffzsI84HM', 'base64'),
   audience: '1mvHGykVHvxzpwstp2wTmrzLrpzouVTm'
 });
-
-
 
 mongoose.connect(dbstring, function (err, res) {
       if (err) {
@@ -106,6 +105,60 @@ router.route('/api/bears')          //while posting pass name=value in parameter
             res.json({ message: 'Successfully deleted' });
         });
     });
+
+
+    router.route('/api/apartments')          
+    .post(function(req, res) {        
+        var apartment = new Apartment();
+        apartment.name = req.body.name;
+
+        apartment.save(function(err) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Apartment created!' });
+        });
+  })
+    .get(function(req, res) {
+        Apartment.find(function(err, apartments) {
+            if (err)
+                res.send(err);
+
+            res.json(apartments);
+        });
+  });
+  
+  router.route('/api/apartments/:apartment_id')    
+    .get(function(req, res) {
+        Apartment.findById(req.params.apartment_id, function(err, apartment) {
+            if (err)
+                res.send(err);
+            res.json(apartment);
+        });
+    })
+
+    .put(function(req, res) {
+        Apartment.findById(req.params.apartment_id, function(err, apartment) {
+            if (err)
+                res.send(err);
+            apartment.name = req.body.name;  
+            apartment.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'apartment updated!' });
+            });
+        });
+    })
+
+    .delete(function(req, res) {
+        Apartment.remove({
+            _id: req.params.apartment_id
+        }, function(err, apartment) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });    
 
 app.use('/', router);
 
