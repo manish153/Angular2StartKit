@@ -8,7 +8,8 @@ var jwt = require('express-jwt');
 var cors = require('cors');
 
 var Bear = require('./models/bear'); 
-var Apartment = require('./models/apartment'); 
+var Apartment = require('./models/apartment');
+var BusinessUnit = require('./models/businessunit'); 
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
@@ -158,7 +159,61 @@ router.route('/api/bears')          //while posting pass name=value in parameter
 
             res.json({ message: 'Successfully deleted' });
         });
-    });    
+    });
+
+    router.route('/api/businessunits')          
+    .post(function(req, res) {        
+        var businessUnit = new BusinessUnit();
+        businessUnit.name = req.body.name;
+
+        businessUnit.save(function(err) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'businessUnit created!' });
+        });
+  })
+    .get(function(req, res) {
+        BusinessUnit.find(function(err, businessunits) {
+            if (err)
+                res.send(err);
+
+            res.json(businessunits);
+        });
+  });
+  
+  router.route('/api/businessUnits/:businessUnit_id')    
+    .get(function(req, res) {
+        BusinessUnit.findById(req.params.businessUnit_id, function(err, businessUnit) {
+            if (err)
+                res.send(err);
+            res.json(businessUnit);
+        });
+    })
+
+    .put(function(req, res) {
+        BusinessUnit.findById(req.params.businessUnit_id, function(err, businessUnit) {
+            if (err)
+                res.send(err);
+            businessUnit.name = req.body.name;  
+            businessUnit.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'businessUnit updated!' });
+            });
+        });
+    })
+
+    .delete(function(req, res) {
+        BusinessUnit.remove({
+            _id: req.params.businessUnit_id
+        }, function(err, businessUnit) {
+            if (err)
+                res.send(err);
+
+            res.json({ message: 'Successfully deleted' });
+        });
+    });
+
 
 app.use('/', router);
 

@@ -19,20 +19,22 @@ import {TasksComponent} from '../tasks/TasksComponent'
 import {PaymentsComponent} from '../payments/PaymentsComponent'
 import {ResidentsComponent} from '../residents/ResidentsComponent'
 import {CommunityComponent} from '../community/CommunityComponent'
+import {BusinessRootComponent} from '../apartment/BusinessRootComponent'
 
 
 @RouteConfig([
     { path: 'app/home', component: HomeComponent, as: 'Home' },
-    { path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard' },
+    { path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard', useAsDefault: true},
     { path: 'app/about', component: AboutComponent, as: 'About' },
     { path: 'app/login', component: LoginComponent, as: 'Login' },
     { path: 'app/profile', component: ProfileComponent, as: 'Profile' },
-    { path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
+    //{ path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
     { path: 'app/requests', component: RequestsComponent, as: 'Requests' },
     { path: 'app/tasks', component: TasksComponent, as: 'Tasks' },
     { path: 'app/payment', component: PaymentsComponent, as: 'Payments' },
     { path: 'app/residents', component: ResidentsComponent, as: 'Residents' },
     { path: 'app/community', component: CommunityComponent, as: 'Community' },
+    { path: 'app/businessunits/...', component: BusinessRootComponent, as: 'BusinessRoots' },
     { path: 'app/**', redirectTo: ['Dashboard'] }
 ])
 @Component({
