@@ -4,11 +4,12 @@ import {CORE_DIRECTIVES} from 'angular2/common'
 import {ROUTER_BINDINGS, ROUTER_PROVIDERS, LocationStrategy, PathLocationStrategy} from 'angular2/router'
 import {HTTP_PROVIDERS} from 'angular2/http'
 import {AuthService} from './services/AuthService'
-
+import {ApartmentService} from './components/apartment/ApartmentService'
 import {AppComponent} from './components/app/AppComponent'
 
 bootstrap(AppComponent, [
     AuthService,
+    ApartmentService,
     ROUTER_PROVIDERS,
     CORE_DIRECTIVES,
     HTTP_PROVIDERS,

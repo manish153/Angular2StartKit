@@ -10,6 +10,7 @@ var ApartmentSchema = new Schema({
     UnitResidentID: String,   /*how to make this an array ??*/
     UnitLeaseStartDate: String,
     UnitLeaseEndDate: String,
+    UserEmail: String
  });
 
 module.exports = mongoose.model('Apartment', ApartmentSchema);

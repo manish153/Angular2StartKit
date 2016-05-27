@@ -28,8 +28,8 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     </div>          
     `,
 
-    directives: [ROUTER_DIRECTIVES],
-    providers: [ApartmentService]
+    directives: [ROUTER_DIRECTIVES]
+    // ,providers: [ApartmentService]
 })
 
 export class ApartmentComponent implements OnInit {

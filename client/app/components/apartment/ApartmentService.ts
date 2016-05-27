@@ -13,4 +13,8 @@ export class ApartmentService {
     getEntries() {
         return this.http.get('./api/apartments').map((res: Response) => res.json());
     }
+
+    getProfile(userEmail :string){
+       return this.http.get(`./api/apartments/getprofile/${userEmail}`).map((res: Response) => res.json());
+    } 
 }

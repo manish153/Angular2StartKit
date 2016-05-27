@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, Output} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
 import {HomeComponent} from '../home/HomeComponent'
 import {DashboardComponent} from './DashboardComponent'
@@ -45,18 +45,19 @@ import {AuthService} from '../../services/AuthService'
         </nav>
     `,
 
-    directives: [ROUTER_DIRECTIVES, DashboardComponent]
+    directives: [ROUTER_DIRECTIVES, DashboardComponent],
 })
 
 export class SidebarComponent {
 
   user = JSON.parse(localStorage.getItem('profile'));
 
-
   constructor(private service: AuthService) {
     this.user = this.service.profileUpdated$.subscribe(profile => {
       this.user = profile;
     });
+
+
   }
 
 

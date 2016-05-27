@@ -20,7 +20,8 @@ app.use(cors());
 var dbstring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
-    'mongodb://heroku_cb2hb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2hb6wm';
+    'mongodb://heroku_d4n6hnhl:q4rfc1uikd51d5sups9mipivnl@ds057254.mlab.com:57254/heroku_d4n6hnhl';
+    //'mongodb://heroku_cb2hb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2hb6wm';
 
 var server = app.listen(port, function() {
     var host = server.address().address;
@@ -136,6 +137,25 @@ router.route('/api/bears')          //while posting pass name=value in parameter
             res.json(apartment);
         });
     })
+
+    router.route('/api/apartments/getprofile/:userEmail')    
+    .get(function(req, res) {
+        Apartment.find({userEmail:req.params.userEmail},'-_id', function(err, apartment) {
+            if (err)
+                res.send(err);
+            res.json(apartment);
+        });
+    })
+
+   //  **The above code can be written as follows as well **
+   //  router.route('/api/apartments/getprofile1/:UserEmail')    
+   //  .get(function(req, res, next) {
+   //      var query = Apartment.find({}).select('.where({userEmail:req.params.UserEmail}); -_id').where({userEmail:req.params.UserEmail});
+   //         query.exec(function (err, Apartment) {
+   //      if (err) return next(err);
+   //      res.send(Apartment);
+   //  });
+   // })
 
     .put(function(req, res) {
         Apartment.findById(req.params.apartment_id, function(err, apartment) {
