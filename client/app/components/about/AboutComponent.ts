@@ -12,7 +12,7 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
     <div>
         <label from="name">Name</label>
-        <input [ngFormControl]="myForm.controls['name'] "type="text" id="name" #name="ngForm">
+        <input [ngFormControl]="myForm.controls['name']" "type="text" id="name" #name="ngForm">
         <span class="validator-error" *ngIf="!name.valid"> required</span>
     </div>
     <button type="submit" [disabled]="!f.valid">submit</button>
