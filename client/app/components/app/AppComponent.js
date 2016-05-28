@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2-jwt', '../home/HomeComponent', '../about/AboutComponent', './HeaderComponent', '../login/LoginComponent', './SidebarComponent', './DashboardComponent', './MaterialDesignLiteUpgradeElement', './AuthRouterOutlet', '../profile/ProfileComponent', '../requests/RequestsComponent', '../tasks/TasksComponent', '../payments/PaymentsComponent', '../residents/ResidentsComponent', '../community/CommunityComponent', '../apartment/BusinessRootComponent'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2-jwt', '../home/HomeComponent', '../about/AboutComponent', './HeaderComponent', '../login/LoginComponent', './SidebarComponent', './DashboardComponent', './MaterialDesignLiteUpgradeElement', './AuthRouterOutlet', '../profile/ProfileComponent', '../requests/RequestsComponent', '../tasks/TasksComponent', '../payments/PaymentsComponent', '../residents/ResidentsComponent', '../community/CommunityComponent', '../apartment/BusinessRootComponent', '../tasks/CreateTaskComponent'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', '../home/Ho
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, angular2_jwt_1, HomeComponent_1, AboutComponent_1, HeaderComponent_1, LoginComponent_1, SidebarComponent_1, DashboardComponent_1, MaterialDesignLiteUpgradeElement_1, AuthRouterOutlet_1, ProfileComponent_1, RequestsComponent_1, TasksComponent_1, PaymentsComponent_1, ResidentsComponent_1, CommunityComponent_1, BusinessRootComponent_1;
+    var core_1, router_1, angular2_jwt_1, HomeComponent_1, AboutComponent_1, HeaderComponent_1, LoginComponent_1, SidebarComponent_1, DashboardComponent_1, MaterialDesignLiteUpgradeElement_1, AuthRouterOutlet_1, ProfileComponent_1, RequestsComponent_1, TasksComponent_1, PaymentsComponent_1, ResidentsComponent_1, CommunityComponent_1, BusinessRootComponent_1, CreateTaskComponent_1;
     var AppComponent;
     return {
         setters:[
@@ -67,6 +67,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', '../home/Ho
             },
             function (BusinessRootComponent_1_1) {
                 BusinessRootComponent_1 = BusinessRootComponent_1_1;
+            },
+            function (CreateTaskComponent_1_1) {
+                CreateTaskComponent_1 = CreateTaskComponent_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -82,6 +85,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2-jwt', '../home/Ho
                         //{ path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
                         { path: 'app/requests', component: RequestsComponent_1.RequestsComponent, as: 'Requests' },
                         { path: 'app/tasks', component: TasksComponent_1.TasksComponent, as: 'Tasks' },
+                        { path: 'app/createtask', component: CreateTaskComponent_1.CreateTaskComponent, as: 'CreateTask' },
                         { path: 'app/payment', component: PaymentsComponent_1.PaymentsComponent, as: 'Payments' },
                         { path: 'app/residents', component: ResidentsComponent_1.ResidentsComponent, as: 'Residents' },
                         { path: 'app/community', component: CommunityComponent_1.CommunityComponent, as: 'Community' },

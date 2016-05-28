@@ -8,7 +8,7 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     selector: 'about',
     styleUrls: ['../app/assets/app.css'],
     template: ` <h1>You have successfully logged out</h1>
-    <h3>About Form</h3>
+    <!--<h3>About Form</h3>
     <form [ngFormModel]="myForm" (ngSubmit)="onSubmit()" #f="ngForm">
     <div>
         <label from="name">Name</label>
@@ -19,7 +19,7 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     </form>
 
 
-    <a [routerLink]="['../Home']">Back to Home component</a>
+    <a [routerLink]="['../Home']">Back to Home component</a> -->
 
     `,
     directives: [ROUTER_DIRECTIVES]

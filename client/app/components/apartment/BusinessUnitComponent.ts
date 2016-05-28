@@ -5,12 +5,6 @@ import {BusinessUnitService} from "./BusinessUnitService";
 import {ApartmentComponent} from "./ApartmentComponent";
 
 
-
-// @RouteConfig([
-//     { path: '/bus', component: BusinessUnitComponent, as: 'BusinessUnit', useAsDefault:true},
-//     { path: '/apartment', component: ApartmentComponent, as: 'Apartment'}
-// ])
-
 @Component({
     selector: 'business-unit',
   template: `
@@ -32,7 +26,6 @@ import {ApartmentComponent} from "./ApartmentComponent";
 })
 
 export class BusinessUnitComponent implements OnInit {
-
     public businessUnits: Object[];
 
     constructor(private businessUnitService: BusinessUnitService) {

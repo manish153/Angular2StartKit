@@ -30,7 +30,7 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                     return this.http.get('./api/apartments').map(function (res) { return res.json(); });
                 };
                 ApartmentService.prototype.getProfile = function (userEmail) {
-                    return this.http.get('/api/apartments/getprofile/:userEmail').map(function (res) { return res.json(); });
+                    return this.http.get("./api/apartments/getprofile/" + userEmail).map(function (res) { return res.json(); });
                 };
                 ApartmentService = __decorate([
                     core_1.Injectable(), 

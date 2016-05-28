@@ -20,6 +20,8 @@ import {PaymentsComponent} from '../payments/PaymentsComponent'
 import {ResidentsComponent} from '../residents/ResidentsComponent'
 import {CommunityComponent} from '../community/CommunityComponent'
 import {BusinessRootComponent} from '../apartment/BusinessRootComponent'
+import {CreateTaskComponent} from '../tasks/CreateTaskComponent'
+
 
 
 @RouteConfig([
@@ -31,6 +33,7 @@ import {BusinessRootComponent} from '../apartment/BusinessRootComponent'
     //{ path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
     { path: 'app/requests', component: RequestsComponent, as: 'Requests' },
     { path: 'app/tasks', component: TasksComponent, as: 'Tasks' },
+    { path: 'app/createtask', component: CreateTaskComponent, as: 'CreateTask' },
     { path: 'app/payment', component: PaymentsComponent, as: 'Payments' },
     { path: 'app/residents', component: ResidentsComponent, as: 'Residents' },
     { path: 'app/community', component: CommunityComponent, as: 'Community' },
