@@ -10,10 +10,10 @@ import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
                 <h3>Tasks Page</h3>   
 
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width" style='width:100%'>
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
                     <thead>
                       <tr>
-                        <th class="mdl-data-table__cell--non-numeric full-width">Material</th>
+                        <th class="mdl-data-table__cell--non-numeric full-width mdl-data-table__header--sorted-descending">Material</th>
                         <th>Quantity</th>
                         <th>Unit price</th>
                       </tr>
