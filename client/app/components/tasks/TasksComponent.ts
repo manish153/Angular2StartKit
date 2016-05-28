@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
+import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 
 @Component({
     selector: 'tasks',
@@ -8,9 +9,36 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
       
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
                 <h3>Tasks Page</h3>   
-                
-    
+
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width" style='width:100%'>
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric full-width">Material</th>
+                        <th>Quantity</th>
+                        <th>Unit price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                        <td>25</td>
+                        <td>$2.90</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                        <td>50</td>
+                        <td>$1.25</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                        <td>10</td>
+                        <td>$2.35</td>
+                      </tr>
+                    </tbody>
+                </table>
           </div>
+          
+
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -62,9 +90,8 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
             </div>
           </div>
          </div>
-
     `,
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES,MDL]
 })
 
 export class TasksComponent {
