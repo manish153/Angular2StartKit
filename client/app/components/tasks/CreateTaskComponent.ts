@@ -1,6 +1,8 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
+import {FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {ApartmentService} from "../apartment/ApartmentService";
 
 
 @Component({
@@ -10,21 +12,18 @@ import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
                 <h3>Create Task Page</h3>   
 
-                <form action="#">
+                <form action="#" (ngSubmit)="onSubmit()">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z]*" id="taskname"/>
+                    <input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z]*" id="taskname" [(ngModel)]="data.taskname"/>
                     <label class="mdl-textfield__label" for="taskname">Task Name</label>
                     <span class="mdl-textfield__error">Only alphabet and no spaces, please!</span>
                    </div> <br/>
                   <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" ></textarea>
+                    <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>
                     <label class="mdl-textfield__label" for="taskdesc">Task Description</label>
                   </div> <br/>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
                 </form>
-
-                
-    
           </div>
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
@@ -79,10 +78,21 @@ import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
          </div>
 
     `,
-    directives: [ROUTER_DIRECTIVES,MDL]
+    directives: [ROUTER_DIRECTIVES, MDL]
 })
 
-export class CreateTaskComponent{
-   
-    constructor() { }
-  }
+export class CreateTaskComponent {
+    
+    data: any
+
+    constructor(private apartmentService: ApartmentService) { 
+      this.data = {};
+    }
+
+    onSubmit(form) {
+      console.log(this.data.taskname);
+      console.log(JSON.stringify(this.data));
+      this.apartmentService.postTasks(this.data);
+      this.data = {};     
+    }
+}

@@ -29,7 +29,6 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
     `,
 
     directives: [ROUTER_DIRECTIVES]
-    // ,providers: [ApartmentService]
 })
 
 export class ApartmentComponent implements OnInit {

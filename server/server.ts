@@ -6,22 +6,20 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('express-jwt');
 var cors = require('cors');
+var router = express.Router();
 
-var Bear = require('./models/bear'); 
 var Apartment = require('./models/apartment');
 var BusinessUnit = require('./models/businessunit'); 
+var Task = require('./models/task');
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
 app.use(cors());
 
-
-
 var dbstring =
     process.env.MONGOLAB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://heroku_d4n6hnhl:q4rfc1uikd51d5sups9mipivnl@ds057254.mlab.com:57254/heroku_d4n6hnhl';
-    //'mongodb://heroku_cb2hb6wm:5plmn61cgsp0l5roqa2qh83mgk@ds011439.mlab.com:11439/heroku_cb2hb6wm';
 
 var server = app.listen(port, function() {
     var host = server.address().address;
@@ -45,8 +43,6 @@ mongoose.connect(dbstring, function (err, res) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var router = express.Router();
-
 router.get('/app/*', function(req, res) {
    res.sendFile(path.resolve(__dirname, 'index.html'));
 });
@@ -55,64 +51,10 @@ router.get('/api',authCheck, function(req, res) {
    res.json({ message: 'hooray! welcome to our api!' });
 });
 
-router.route('/api/bears')          //while posting pass name=value in parameter body. No space.
-    .post(function(req, res) {        
-        var bear = new Bear();
-        bear.name = req.body.name;
-
-        bear.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json({ message: 'Bear created!' });
-        });
-  })
-    .get(function(req, res) {
-        Bear.find(function(err, bears) {
-            if (err)
-                res.send(err);
-
-            res.json(bears);
-        });
-  });
-  
-  router.route('/api/bears/:bear_id')    
-    .get(function(req, res) {
-        Bear.findById(req.params.bear_id, function(err, bear) {
-            if (err)
-                res.send(err);
-            res.json(bear);
-        });
-    })
-
-    .put(function(req, res) {
-        Bear.findById(req.params.bear_id, function(err, bear) {
-            if (err)
-                res.send(err);
-            bear.name = req.body.name;  
-            bear.save(function(err) {
-                if (err)
-                    res.send(err);
-                res.json({ message: 'Bear updated!' });
-            });
-        });
-    })
-
-    .delete(function(req, res) {
-        Bear.remove({
-            _id: req.params.bear_id
-        }, function(err, bear) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
-    });
-
-
-    router.route('/api/apartments')          
+   router.route('/api/apartments')
     .post(function(req, res) {        
         var apartment = new Apartment();
-        apartment.name = req.body.name;
+        apartment.UnitAddress = req.body.taskname;
 
         apartment.save(function(err) {
             if (err)
@@ -181,17 +123,7 @@ router.route('/api/bears')          //while posting pass name=value in parameter
         });
     });
 
-    router.route('/api/businessunits')          
-    .post(function(req, res) {        
-        var businessUnit = new BusinessUnit();
-        businessUnit.name = req.body.name;
-
-        businessUnit.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json({ message: 'businessUnit created!' });
-        });
-  })
+    router.route('/api/businessunits')             
     .get(function(req, res) {
         BusinessUnit.find(function(err, businessunits) {
             if (err)
@@ -201,32 +133,55 @@ router.route('/api/bears')          //while posting pass name=value in parameter
         });
   });
   
-  router.route('/api/businessUnits/:businessUnit_id')    
-    .get(function(req, res) {
-        BusinessUnit.findById(req.params.businessUnit_id, function(err, businessUnit) {
+  /*Task Endpoints*/
+
+  router.route('/api/newtask')
+    .post(function(req, res) {        
+        var task = new Task();
+        task.taskname = req.body.taskname;
+        task.taskdesc = req.body.taskdesc;
+
+        task.save(function(err) {
             if (err)
                 res.send(err);
-            res.json(businessUnit);
+            res.json({ message: 'Task created!' });
+        });
+  })
+    .get(function(req, res) {
+        Task.find(function(err, tasks) {
+            if (err)
+                res.send(err);
+
+            res.json(tasks);
+        });
+  });
+  
+  router.route('/api/newtask/:task_id')    
+    .get(function(req, res) {
+        Task.findById(req.params.task_id, function(err, task) {
+            if (err)
+                res.send(err);
+            res.json(task);
         });
     })
 
     .put(function(req, res) {
-        BusinessUnit.findById(req.params.businessUnit_id, function(err, businessUnit) {
+        Task.findById(req.params.task_id, function(err, task) {
             if (err)
                 res.send(err);
-            businessUnit.name = req.body.name;  
-            businessUnit.save(function(err) {
+            task.name = req.body.name;  
+            task.save(function(err) {
                 if (err)
                     res.send(err);
-                res.json({ message: 'businessUnit updated!' });
+                res.json({ message: 'task updated!' });
             });
         });
     })
 
     .delete(function(req, res) {
-        BusinessUnit.remove({
-            _id: req.params.businessUnit_id
-        }, function(err, businessUnit) {
+        Task.remove({
+            _id: req.params.task_id
+        }, function(err, task) {
             if (err)
                 res.send(err);
 
@@ -235,7 +190,5 @@ router.route('/api/bears')          //while posting pass name=value in parameter
     });
 
 
+
 app.use('/', router);
-
-
-
