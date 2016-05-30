@@ -11,7 +11,7 @@ export class ApartmentService {
     }
 
     /*APARTMENT SERVICE METHODS*/
-    getEntries() {
+    getApartments() {
         return this.http.get('./api/apartments').map((res: Response) => res.json());
     }
 
@@ -38,7 +38,9 @@ export class ApartmentService {
             .map((res: Response) => res.json()).subscribe();
     }
 
-    getAllTasks() {}
+    getAllTasks() {
+        return this.http.get('./api/newtask').map((res: Response) => res.json());
+    }
 
     getMyTask() { }
 

@@ -1,6 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component,OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
+import {ApartmentService} from "../apartment/ApartmentService";
 
 @Component({
     selector: 'tasks',
@@ -10,32 +11,18 @@ import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
                 <h3>Tasks Page</h3>   
 
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
-                    <thead>
-                      <tr>
-                        <th class="mdl-data-table__cell--non-numeric full-width mdl-data-table__header--sorted-descending">Material</th>
-                        <th>Quantity</th>
-                        <th>Unit price</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-                        <td>25</td>
-                        <td>$2.90</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
-                        <td>50</td>
-                        <td>$1.25</td>
-                      </tr>
-                      <tr>
-                        <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
-                        <td>10</td>
-                        <td>$2.35</td>
-                      </tr>
-                    </tbody>
-                </table>
+              <div *ngFor="#task of tasks" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                <h2 class="mdl-card__title-text">{{task.taskname}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                {{task.taskdesc}}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.taskstatus}}</a>
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Created_by</a>
+                </div>
+             </div>          
           </div>
           
 
@@ -94,6 +81,12 @@ import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
     directives: [ROUTER_DIRECTIVES,MDL]
 })
 
-export class TasksComponent {
-    constructor() { }
+export class TasksComponent implements OnInit {
+  public tasks: Object[];
+    constructor(private apartmentService: ApartmentService) { }
+
+    ngOnInit() {
+    this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);
+    console.log(this.tasks);
+    }
 }

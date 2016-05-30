@@ -62,8 +62,17 @@ router.get('/api',authCheck, function(req, res) {
             res.json({ message: 'Apartment created!' });
         });
   })
-    .get(function(req, res) {
-        Apartment.find(function(err, apartments) {
+  //   .get(function(req, res) {
+  //       Apartment.find(function(err, apartments) {
+  //           if (err)
+  //               res.send(err);
+
+  //           res.json(apartments);
+  //       });
+  // });
+
+  .get(function(req, res) {
+        Apartment.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',function(err, apartments) {
             if (err)
                 res.send(err);
 

@@ -7,13 +7,6 @@ import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 
 @Component({
     selector: 'apartment',
-    /*template: `<h1>Apartment Page - work in progress </h1>
-         <ul>
-          <li *ngFor="#apartment of apartments">{{apartment.UnitType}}</li>
-         </ul> 
-
-    <a [routerLink]="['../Dashboard']">Back to Dash</a>
-    `,*/
   template: `
    <div *ngFor="#apartment of apartments" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -40,7 +33,7 @@ export class ApartmentComponent implements OnInit {
     }
 
     ngOnInit() {
-    this.apartmentService.getEntries().subscribe(res => this.apartments = res);
+    this.apartmentService.getApartments().subscribe(res => this.apartments = res);
     console.log(this.apartments);
     }
 }

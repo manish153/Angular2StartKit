@@ -26,12 +26,31 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                 function ApartmentService(http) {
                     this.http = http;
                 }
+                /*APARTMENT SERVICE METHODS*/
                 ApartmentService.prototype.getEntries = function () {
                     return this.http.get('./api/apartments').map(function (res) { return res.json(); });
                 };
+                ApartmentService.prototype.postApartment = function (data) {
+                    return this.http.post('/api/apartments', JSON.stringify(data), {
+                        headers: new http_1.Headers({ 'Content-Type': 'application/json' })
+                    })
+                        .map(function (res) { return res.json(); }).subscribe();
+                };
+                /*PROFILE SERVICE METHODS*/
                 ApartmentService.prototype.getProfile = function (userEmail) {
                     return this.http.get("./api/apartments/getprofile/" + userEmail).map(function (res) { return res.json(); });
                 };
+                /*TASK SERVICE METHODS*/
+                ApartmentService.prototype.postTasks = function (data) {
+                    return this.http.post('/api/newtask', JSON.stringify(data), {
+                        headers: new http_1.Headers({ 'Content-Type': 'application/json' })
+                    })
+                        .map(function (res) { return res.json(); }).subscribe();
+                };
+                ApartmentService.prototype.getAllTasks = function () { };
+                ApartmentService.prototype.getMyTask = function () { };
+                ApartmentService.prototype.deleteTask = function () { };
+                ApartmentService.prototype.markCompleted = function () { };
                 ApartmentService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

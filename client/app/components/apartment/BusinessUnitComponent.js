@@ -24,10 +24,6 @@ System.register(['angular2/core', "angular2/router", "./BusinessUnitService"], f
                 BusinessUnitService_1 = BusinessUnitService_1_1;
             }],
         execute: function() {
-            // @RouteConfig([
-            //     { path: '/bus', component: BusinessUnitComponent, as: 'BusinessUnit', useAsDefault:true},
-            //     { path: '/apartment', component: ApartmentComponent, as: 'Apartment'}
-            // ])
             BusinessUnitComponent = (function () {
                 function BusinessUnitComponent(businessUnitService) {
                     this.businessUnitService = businessUnitService;

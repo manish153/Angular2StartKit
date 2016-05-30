@@ -22,7 +22,11 @@ import {ApartmentService} from "../apartment/ApartmentService";
                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>
                     <label class="mdl-textfield__label" for="taskdesc">Task Description</label>
                   </div> <br/>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
+                  <select (change)="onSelect($event.target.value)">
+                      <option *ngFor="#taskstatus of dropdownValues" [value]="taskstatus.value">{{taskstatus.name}}</option>
+                  </select>
+      
+                <br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
                 </form>
           </div>
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -34,7 +38,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
                 View Existing Tasks  
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">View</a>
+                <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Tasks</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
@@ -82,17 +86,39 @@ import {ApartmentService} from "../apartment/ApartmentService";
 })
 
 export class CreateTaskComponent {
-    
-    data: any
 
-    constructor(private apartmentService: ApartmentService) { 
-      this.data = {};
+    data: any;
+    public dropdownValues: Taskstatus[] = [
+         {"name":"OPEN","value":"OPEN"},
+         {"name":"CLOSED","value":"CLOSED"}
+    ];
+
+    constructor(private apartmentService: ApartmentService) {
+    this.data = {};
     }
 
     onSubmit(form) {
-      console.log(this.data.taskname);
-      console.log(JSON.stringify(this.data));
-      this.apartmentService.postTasks(this.data);
-      this.data = {};     
+    console.log(this.data.taskname);
+    console.log(JSON.stringify(this.data));
+    this.apartmentService.postTasks(this.data);
+    this.data = {};
     }
+
+    public selectedStatus: Taskstatus = this.dropdownValues[0];
+   
+    onSelect(taskevent) { 
+        this.selectedStatus = null;
+        for (var i = 0; i < this.dropdownValues.length; i++)
+        {
+          if (this.dropdownValues[i].value == taskevent) {
+            this.selectedStatus = this.dropdownValues[i];
+            console.log(this.selectedStatus.value);
+          }
+        }
+    }
+}
+
+class Taskstatus{
+  name: string;
+  value: string;
 }

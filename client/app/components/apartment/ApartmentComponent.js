@@ -37,13 +37,6 @@ System.register(['angular2/core', "angular2/router", "./ApartmentService"], func
                 ApartmentComponent = __decorate([
                     core_1.Component({
                         selector: 'apartment',
-                        /*template: `<h1>Apartment Page - work in progress </h1>
-                             <ul>
-                              <li *ngFor="#apartment of apartments">{{apartment.UnitType}}</li>
-                             </ul>
-                    
-                        <a [routerLink]="['../Dashboard']">Back to Dash</a>
-                        `,*/
                         template: "\n   <div *ngFor=\"#apartment of apartments\" class=\"demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop\">\n              <div class=\"mdl-card__title mdl-card--expand mdl-color--teal-300\">\n                <h2 class=\"mdl-card__title-text\">{{apartment.unitID}}</h2>\n              </div>\n              <div class=\"mdl-card__supporting-text mdl-color-text--grey-600\">\n                Non dolore elit adipisicing ea repre henderit consectetur culpa.\n              </div>\n              <div class=\"mdl-card__actions mdl-card--border\">\n                <a href=\"#\" class=\"mdl-button mdl-js-button mdl-js-ripple-effect\">{{apartment.UnitType}}</a>\n              </div>\n    </div>          \n    ",
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 

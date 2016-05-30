@@ -23,7 +23,6 @@ import {BusinessRootComponent} from '../apartment/BusinessRootComponent'
 import {CreateTaskComponent} from '../tasks/CreateTaskComponent'
 
 
-
 @RouteConfig([
     { path: 'app/home', component: HomeComponent, as: 'Home' },
     { path: 'app/dashboard', component: DashboardComponent, as: 'Dashboard', useAsDefault: true},
@@ -108,7 +107,6 @@ import {CreateTaskComponent} from '../tasks/CreateTaskComponent'
   </body>
 
     `,
-    /*styleUrls: ['../app/assets/styles.css'], */
     directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent, MDL, AuthRouterOutlet],
     providers: [AUTH_PROVIDERS]
 })
