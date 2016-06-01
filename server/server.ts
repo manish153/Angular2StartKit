@@ -166,7 +166,7 @@ router.get('/api',authCheck, function(req, res) {
         });
   });
   
-  router.route('/api/newtask/:task_id')    
+  router.route('/api/newtask/:_id')    
     .get(function(req, res) {
         Task.findById(req.params.task_id, function(err, task) {
             if (err)
@@ -176,10 +176,10 @@ router.get('/api',authCheck, function(req, res) {
     })
 
     .put(function(req, res) {
-        Task.findById(req.params.task_id, function(err, task) {
+        Task.findById(req.params._id, function(err, task) {
             if (err)
                 res.send(err);
-            task.name = req.body.name;  
+            task.taskname = req.body.taskname;  
             task.save(function(err) {
                 if (err)
                     res.send(err);

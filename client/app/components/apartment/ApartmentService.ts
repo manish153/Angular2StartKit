@@ -42,9 +42,19 @@ export class ApartmentService {
         return this.http.get('./api/newtask').map((res: Response) => res.json());
     }
 
+    updateTask(data:any){
+        console.log(data._id);
+        return this.http.put(`./api/newtask/${data._id}`,
+          JSON.stringify(data),{ headers: new Headers({'Content-Type':'application/json'})
+        })
+        .map((res: Response) => res.json()).subscribe();   
+    }
+
     getMyTask() { }
 
     deleteTask() { }
 
     markCompleted() { }
+
+
 }

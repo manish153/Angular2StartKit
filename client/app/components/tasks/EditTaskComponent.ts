@@ -99,7 +99,8 @@ export class EditTaskComponent {
 
     onSubmit(form) {
     
-    //this.apartmentService.postTasks(this.data);
+    this.apartmentService.updateTask(this.data);
+    console.log('this data submitted' +JSON.stringify(this.data))
     
     }
 
