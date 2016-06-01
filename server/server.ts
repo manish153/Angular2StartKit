@@ -149,6 +149,7 @@ router.get('/api',authCheck, function(req, res) {
         var task = new Task();
         task.taskname = req.body.taskname;
         task.taskdesc = req.body.taskdesc;
+        task.taskstatus = req.body.taskstatus;
 
         task.save(function(err) {
             if (err)

@@ -27,7 +27,7 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                     this.http = http;
                 }
                 /*APARTMENT SERVICE METHODS*/
-                ApartmentService.prototype.getEntries = function () {
+                ApartmentService.prototype.getApartments = function () {
                     return this.http.get('./api/apartments').map(function (res) { return res.json(); });
                 };
                 ApartmentService.prototype.postApartment = function (data) {
@@ -47,7 +47,9 @@ System.register(['angular2/http', 'angular2/core', 'rxjs/add/operator/map'], fun
                     })
                         .map(function (res) { return res.json(); }).subscribe();
                 };
-                ApartmentService.prototype.getAllTasks = function () { };
+                ApartmentService.prototype.getAllTasks = function () {
+                    return this.http.get('./api/newtask').map(function (res) { return res.json(); });
+                };
                 ApartmentService.prototype.getMyTask = function () { };
                 ApartmentService.prototype.deleteTask = function () { };
                 ApartmentService.prototype.markCompleted = function () { };

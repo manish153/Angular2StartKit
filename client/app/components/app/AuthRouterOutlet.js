@@ -55,7 +55,7 @@ System.register(["angular2/core", '../../services/AuthService', "angular2/router
                     core_1.Directive({
                         selector: 'auth-router-outlet'
                     }), 
-                    __metadata('design:paramtypes', [core_1.ElementRef, core_1.DynamicComponentLoader, router_1.Router, String, AuthService_1.AuthService])
+                    __metadata('design:paramtypes', [core_1.ViewContainerRef, core_1.DynamicComponentLoader, router_1.Router, String, AuthService_1.AuthService])
                 ], AuthRouterOutlet);
                 return AuthRouterOutlet;
             }(router_1.RouterOutlet));

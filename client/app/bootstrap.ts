@@ -8,9 +8,11 @@ import {HTTP_PROVIDERS} from 'angular2/http'
 import {AuthService} from './services/AuthService'
 import {ApartmentService} from './components/apartment/ApartmentService'
 import {AppComponent} from './components/app/AppComponent'
+import {SharedService} from './services/SharedService'
 
 bootstrap(AppComponent, [
     AuthService,
+    SharedService,
     ApartmentService,
     ROUTER_PROVIDERS,
     CORE_DIRECTIVES,

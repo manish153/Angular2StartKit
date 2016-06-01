@@ -2,6 +2,7 @@ import {Component,OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {ApartmentService} from "../apartment/ApartmentService";
+import {SharedService} from "../../services/SharedService";
 
 @Component({
     selector: 'tasks',
@@ -9,7 +10,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
     template: `<div mdl class="mdl-grid demo-content">
       
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-                <h3>Tasks Page</h3>   
+                <h3>Tasks Page</h3>
 
               <div *ngFor="#task of tasks" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
                 <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -18,9 +19,12 @@ import {ApartmentService} from "../apartment/ApartmentService";
                 <div class="mdl-card__supporting-text mdl-color-text--grey-600">
                 {{task.taskdesc}}
                 </div>
-                <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.taskstatus}}</a>
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Created_by</a>
+                <div class="mdl-card__actions mdl-card--border">                
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Mark Completed</a>
+                
+                <!--<a [routerLink]="['/EditTask', {data: task.taskname, data2: task.taskdesc}, {data2: task.taskdesc}]"  class="mdl-button mdl-js-button mdl-js-ripple-effect">EDIT</a>-->
+                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>
                 </div>
              </div>          
           </div>
@@ -79,14 +83,20 @@ import {ApartmentService} from "../apartment/ApartmentService";
          </div>
     `,
     directives: [ROUTER_DIRECTIVES,MDL]
+    /*,providers: [TaskService]*/
 })
 
 export class TasksComponent implements OnInit {
   public tasks: Object[];
-    constructor(private apartmentService: ApartmentService) { }
+    constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
 
     ngOnInit() {
     this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);
-    console.log(this.tasks);
+    console.log('onInit' +this.tasks);
+    }
+
+    onClick1(task){
+      this.sharedService.temp = task;
+      console.log('value in the shared service ' + JSON.stringify(this.sharedService.temp))
     }
 }

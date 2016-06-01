@@ -31,7 +31,7 @@ System.register(['angular2/core', "angular2/router", "./ApartmentService"], func
                 }
                 ApartmentComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this.apartmentService.getEntries().subscribe(function (res) { return _this.apartments = res; });
+                    this.apartmentService.getApartments().subscribe(function (res) { return _this.apartments = res; });
                     console.log(this.apartments);
                 };
                 ApartmentComponent = __decorate([

@@ -21,6 +21,7 @@ import {ResidentsComponent} from '../residents/ResidentsComponent'
 import {CommunityComponent} from '../community/CommunityComponent'
 import {BusinessRootComponent} from '../apartment/BusinessRootComponent'
 import {CreateTaskComponent} from '../tasks/CreateTaskComponent'
+import {EditTaskComponent} from '../tasks/EditTaskComponent'
 
 
 @RouteConfig([
@@ -33,6 +34,7 @@ import {CreateTaskComponent} from '../tasks/CreateTaskComponent'
     { path: 'app/requests', component: RequestsComponent, as: 'Requests' },
     { path: 'app/tasks', component: TasksComponent, as: 'Tasks' },
     { path: 'app/createtask', component: CreateTaskComponent, as: 'CreateTask' },
+    { path: 'app/edittask', component: EditTaskComponent, as: 'EditTask' },
     { path: 'app/payment', component: PaymentsComponent, as: 'Payments' },
     { path: 'app/residents', component: ResidentsComponent, as: 'Residents' },
     { path: 'app/community', component: CommunityComponent, as: 'Community' },

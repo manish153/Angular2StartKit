@@ -1,22 +1,22 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES,RouteParams} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 import {ApartmentService} from "../apartment/ApartmentService";
-
+import {SharedService} from "../../services/SharedService";  
 
 @Component({
-    selector: 'tasks',
+    selector: 'edit-tasks',
     template: `<div mdl class="mdl-grid demo-content">
       
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-                <h3>Create Task Page</h3>   
+                <h3>EDIT Task Page</h3>   
 
                 <form action="#" (ngSubmit)="onSubmit()">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z]*" id="taskname" [(ngModel)]="data.taskname"/>
+                    <input class="mdl-textfield__input" type="text" id="taskname" [(ngModel)]="data.taskname"/>
                     <label class="mdl-textfield__label" for="taskname">Task Name</label>
-                    <span class="mdl-textfield__error">Only alphabet and no spaces, please!</span>
+                    
                    </div> <br/>
                   <div class="mdl-textfield mdl-js-textfield">
                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>
@@ -26,7 +26,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
                       <option *ngFor="#taskstatus of dropdownValues" [ngValue]="taskstatus">{{taskstatus}}</option>
                   </select> -->
       
-                <br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
+                <br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">SAVE</button>
                 </form>
           </div>
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -83,22 +83,24 @@ import {ApartmentService} from "../apartment/ApartmentService";
 
     `,
     directives: [ROUTER_DIRECTIVES, MDL]
+
 })
 
-export class CreateTaskComponent {
+export class EditTaskComponent {
 
     data: any;
 
-    public dropdownValues= ["OPEN","CLOSED"];
+    constructor(private apartmentService: ApartmentService,params: RouteParams , private sharedService: SharedService) {
+      console.log('I am in Edit ' +JSON.stringify(this.sharedService.temp));
+      this.data=this.sharedService.temp;
+      console.log(JSON.stringify(this.data));
 
-    constructor(private apartmentService: ApartmentService) {
-    this.data = {};
     }
 
     onSubmit(form) {
-    console.log(JSON.stringify(this.data));
-    this.apartmentService.postTasks(this.data);
-    this.data = {};
+    
+    //this.apartmentService.postTasks(this.data);
+    
     }
 
 }
