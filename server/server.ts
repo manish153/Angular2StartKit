@@ -168,7 +168,7 @@ router.get('/api',authCheck, function(req, res) {
 
   router.route('/api/mytask/:userEmail')    
     .get(function(req, res) {
-        Task.find({assignedto:req.params.userEmail.toLowerCase()}, function(err, task) {
+        Task.find({$and:[{assignedto:req.params.userEmail.toLowerCase()},{taskstatus:'OPEN'}]}, function(err, task) {
             if (err)
                 res.send(err);
             res.json(task);

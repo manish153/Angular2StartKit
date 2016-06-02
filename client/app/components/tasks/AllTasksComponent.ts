@@ -40,6 +40,7 @@ import {SharedService} from "../../services/SharedService";
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a [routerLink]="['../CreateTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect">Create</a>
+                <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">My tasks</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
