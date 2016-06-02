@@ -16,6 +16,7 @@ import {ProfileComponent} from '../profile/ProfileComponent'
 import {ApartmentComponent} from '../apartment/ApartmentComponent'
 import {RequestsComponent} from '../requests/RequestsComponent'
 import {TasksComponent} from '../tasks/TasksComponent'
+import {AllTasksComponent} from '../tasks/AllTasksComponent'
 import {PaymentsComponent} from '../payments/PaymentsComponent'
 import {ResidentsComponent} from '../residents/ResidentsComponent'
 import {CommunityComponent} from '../community/CommunityComponent'
@@ -33,6 +34,7 @@ import {EditTaskComponent} from '../tasks/EditTaskComponent'
     //{ path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
     { path: 'app/requests', component: RequestsComponent, as: 'Requests' },
     { path: 'app/tasks', component: TasksComponent, as: 'Tasks' },
+    { path: 'app/alltasks', component: AllTasksComponent, as: 'AllTasks' },
     { path: 'app/createtask', component: CreateTaskComponent, as: 'CreateTask' },
     { path: 'app/edittask', component: EditTaskComponent, as: 'EditTask' },
     { path: 'app/payment', component: PaymentsComponent, as: 'Payments' },

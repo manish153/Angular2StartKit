@@ -24,7 +24,7 @@ import {SharedService} from "../../services/SharedService";
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Mark Completed</a>
                 
                 <!--<a [routerLink]="['/EditTask', {data: task.taskname, data2: task.taskdesc}, {data2: task.taskdesc}]"  class="mdl-button mdl-js-button mdl-js-ripple-effect">EDIT</a>-->
-                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>
+                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>               
                 </div>
              </div>          
           </div>
@@ -40,6 +40,7 @@ import {SharedService} from "../../services/SharedService";
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a [routerLink]="['../CreateTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect">Create</a>
+                <a [routerLink]="['../AllTasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Tasks</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
@@ -87,11 +88,15 @@ import {SharedService} from "../../services/SharedService";
 })
 
 export class TasksComponent implements OnInit {
-  public tasks: Object[];
+
+    public tasks: Object[];
+    userEmail = JSON.parse(localStorage.getItem('profile'));
     constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
 
     ngOnInit() {
-    this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);
+    console.log(this.userEmail.email);  
+    this.apartmentService.getMyTask(this.userEmail.email).subscribe(res => this.tasks = res);
+
     console.log('onInit' +this.tasks);
     }
 

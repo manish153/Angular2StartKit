@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES,RouteParams} from "angular2/router";
+import {ROUTER_DIRECTIVES,Router} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 import {ApartmentService} from "../apartment/ApartmentService";
@@ -38,7 +38,7 @@ import {SharedService} from "../../services/SharedService";
                 View Existing Tasks  
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Tasks</a>
+                <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">My Tasks</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
@@ -90,7 +90,7 @@ export class EditTaskComponent {
 
     data: any;
 
-    constructor(private apartmentService: ApartmentService,params: RouteParams , private sharedService: SharedService) {
+    constructor(private apartmentService: ApartmentService,private router: Router , private sharedService: SharedService) {
       console.log('I am in Edit ' +JSON.stringify(this.sharedService.temp));
       this.data=this.sharedService.temp;
       console.log(JSON.stringify(this.data));
@@ -99,8 +99,9 @@ export class EditTaskComponent {
 
     onSubmit(form) {
     
-    this.apartmentService.updateTask(this.data);
+    this.apartmentService.updateTask(this.data).then(_=>this.router.navigate(['Tasks']));
     console.log('this data submitted' +JSON.stringify(this.data))
+    //this.router.navigate(['Tasks']);
     
     }
 

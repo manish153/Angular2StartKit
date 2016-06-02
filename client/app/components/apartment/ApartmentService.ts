@@ -43,14 +43,19 @@ export class ApartmentService {
     }
 
     updateTask(data:any){
-        console.log(data._id);
-        return this.http.put(`./api/newtask/${data._id}`,
+        
+        return new Promise((resolve,reject)=> {
+          this.http.put(`./api/newtask/${data._id}`,
           JSON.stringify(data),{ headers: new Headers({'Content-Type':'application/json'})
         })
-        .map((res: Response) => res.json()).subscribe();   
+        .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error))
+      });   
     }
 
-    getMyTask() { }
+    getMyTask(userEmail: string) { 
+        console.log('getMyTask' +userEmail);
+        return this.http.get(`./api/mytask/${userEmail}`).map((res: Response) => res.json());
+    }
 
     deleteTask() { }
 

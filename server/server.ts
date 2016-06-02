@@ -165,6 +165,15 @@ router.get('/api',authCheck, function(req, res) {
             res.json(tasks);
         });
   });
+
+  router.route('/api/mytask/:userEmail')    
+    .get(function(req, res) {
+        Task.find({assignedto:req.params.userEmail.toLowerCase()}, function(err, task) {
+            if (err)
+                res.send(err);
+            res.json(task);
+        });
+  })  
   
   router.route('/api/newtask/:_id')    
     .get(function(req, res) {
@@ -180,6 +189,7 @@ router.get('/api',authCheck, function(req, res) {
             if (err)
                 res.send(err);
             task.taskname = req.body.taskname;  
+            task.taskdesc = req.body.taskdesc;
             task.save(function(err) {
                 if (err)
                     res.send(err);
@@ -198,7 +208,5 @@ router.get('/api',authCheck, function(req, res) {
             res.json({ message: 'Successfully deleted' });
         });
     });
-
-
 
 app.use('/', router);

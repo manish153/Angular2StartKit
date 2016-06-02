@@ -1,44 +1,45 @@
-import {Component} from 'angular2/core';
+import {Component,OnInit} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
-import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 import {ApartmentService} from "../apartment/ApartmentService";
-
+import {SharedService} from "../../services/SharedService";
 
 @Component({
-    selector: 'tasks',
+    selector: 'all-tasks',
+    styleUrls: ['../app/assets/app.css'],
     template: `<div mdl class="mdl-grid demo-content">
       
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-                <h3>Create Task Page</h3>   
+                <h3>Tasks Page</h3>
 
-                <form action="#" (ngSubmit)="onSubmit()">
-                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z]*" id="taskname" [(ngModel)]="data.taskname"/>
-                    <label class="mdl-textfield__label" for="taskname">Task Name</label>
-                    <span class="mdl-textfield__error">Only alphabet and no spaces, please!</span>
-                   </div> <br/>
-                  <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>
-                    <label class="mdl-textfield__label" for="taskdesc">Task Description</label>
-                  </div> <br/>
-                <!--  <select [(ngModel)]="data.taskstatus">
-                      <option *ngFor="#taskstatus of dropdownValues" [ngValue]="taskstatus">{{taskstatus}}</option>
-                  </select> -->
-      
-                <br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
-                </form>
+              <div *ngFor="#task of tasks" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                <h2 class="mdl-card__title-text">{{task.taskname}}</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                {{task.taskdesc}}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">                
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
+                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Mark Completed</a>
+                
+                <!--<a [routerLink]="['/EditTask', {data: task.taskname, data2: task.taskdesc}, {data2: task.taskdesc}]"  class="mdl-button mdl-js-button mdl-js-ripple-effect">EDIT</a>-->
+                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>              
+                </div>
+             </div>          
           </div>
+          
+
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
-                <h2 class="mdl-card__title-text">View Tasks</h2>
+                <h2 class="mdl-card__title-text">Create New Task</h2>
               </div>
               <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                View Existing Tasks  
+                Create New Tasks For Team Members 
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">My Tasks</a>
+                <a [routerLink]="['../CreateTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect">Create</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
@@ -80,25 +81,22 @@ import {ApartmentService} from "../apartment/ApartmentService";
             </div>
           </div>
          </div>
-
     `,
-    directives: [ROUTER_DIRECTIVES, MDL]
+    directives: [ROUTER_DIRECTIVES,MDL]
+    /*,providers: [TaskService]*/
 })
 
-export class CreateTaskComponent {
+export class AllTasksComponent implements OnInit {
+  public tasks: Object[];
+    constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
 
-    data: any;
-
-    public dropdownValues= ["OPEN","CLOSED"];
-
-    constructor(private apartmentService: ApartmentService) {
-    this.data = {};
+    ngOnInit() {
+    this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);
+    console.log('onInit' +this.tasks);
     }
 
-    onSubmit(form) {
-    console.log(JSON.stringify(this.data));
-    this.apartmentService.postTasks(this.data);
-    this.data = {};
+    onClick1(task){
+      this.sharedService.temp = task;
+      console.log('value in the shared service ' + JSON.stringify(this.sharedService.temp))
     }
-
 }
