@@ -62,14 +62,6 @@ router.get('/api',authCheck, function(req, res) {
             res.json({ message: 'Apartment created!' });
         });
   })
-  //   .get(function(req, res) {
-  //       Apartment.find(function(err, apartments) {
-  //           if (err)
-  //               res.send(err);
-
-  //           res.json(apartments);
-  //       });
-  // });
 
   .get(function(req, res) {
         Apartment.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',function(err, apartments) {
@@ -79,7 +71,7 @@ router.get('/api',authCheck, function(req, res) {
             res.json(apartments);
         });
   });
-  
+
   router.route('/api/apartments/:apartment_id')    
     .get(function(req, res) {
         Apartment.findById(req.params.apartment_id, function(err, apartment) {
@@ -87,8 +79,18 @@ router.get('/api',authCheck, function(req, res) {
                 res.send(err);
             res.json(apartment);
         });
-    })
+    });
 
+  router.route('/api/getusers')    
+    .get(function(req, res) {        
+        Apartment.find({userEmail: {$exists: true, $ne: null}},'userEmail', function(err, apartments) {
+            if (err)
+                res.send(err);
+            res.json(apartments);
+            
+        });
+    })
+  
     router.route('/api/apartments/getprofile/:userEmail')    
     .get(function(req, res) {
         Apartment.find({userEmail:req.params.userEmail},'-_id', function(err, apartment) {
@@ -149,8 +151,8 @@ router.get('/api',authCheck, function(req, res) {
         var task = new Task();
         task.taskname = req.body.taskname;
         task.taskdesc = req.body.taskdesc;
-        task.taskstatus = req.body.taskstatus;
-
+        task.assignedto = req.body.assignedto;
+        task.taskstatus = 'OPEN';
         task.save(function(err) {
             if (err)
                 res.send(err);

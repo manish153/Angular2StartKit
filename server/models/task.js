@@ -6,7 +6,7 @@ var TaskSchema = new Schema({
 	taskdesc: String,
 	taskcreator:String,
 	createddate: String,
-    assigedto: String,
+    assignedto: String,
     taskstatus: String
  });
 

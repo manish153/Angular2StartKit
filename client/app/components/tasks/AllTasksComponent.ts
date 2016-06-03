@@ -92,12 +92,10 @@ export class AllTasksComponent implements OnInit {
     constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
 
     ngOnInit() {
-    this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);
-    console.log('onInit' +this.tasks);
+    this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);    
     }
 
     onClick1(task){
-      this.sharedService.temp = task;
-      console.log('value in the shared service ' + JSON.stringify(this.sharedService.temp))
+      this.sharedService.temp = task;      
     }
 }

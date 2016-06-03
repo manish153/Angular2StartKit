@@ -28,14 +28,19 @@ export class ApartmentService {
         return this.http.get(`./api/apartments/getprofile/${userEmail}`).map((res: Response) => res.json());
     }
 
+    getUsersList(){        
+        return this.http.get('/api/getusers').map((res: Response) => res.json());   
+    }
 
     /*TASK SERVICE METHODS*/
     postTasks(data: any) {
-        return this.http.post('/api/newtask',
+        return new Promise((resolve,reject)=> {
+         this.http.post('/api/newtask',
             JSON.stringify(data), {
                 headers: new Headers({ 'Content-Type': 'application/json' })
             })
-            .map((res: Response) => res.json()).subscribe();
+            .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error));
+          });  
     }
 
     getAllTasks() {
@@ -46,7 +51,8 @@ export class ApartmentService {
         
         return new Promise((resolve,reject)=> {
           this.http.put(`./api/newtask/${data._id}`,
-          JSON.stringify(data),{ headers: new Headers({'Content-Type':'application/json'})
+          JSON.stringify(data),{ 
+             headers: new Headers({'Content-Type':'application/json'})
         })
         .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error))
       });   

@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component,OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES,Router} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {FormBuilder, Validators, ControlGroup} from "angular2/common";
 import {ApartmentService} from "../apartment/ApartmentService";
@@ -10,7 +10,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
     template: `<div mdl class="mdl-grid demo-content">
       
           <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
-                <h3>Create Task Page</h3>   
+                <h3>Create Task Page</h3>
 
                 <form action="#" (ngSubmit)="onSubmit()">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -22,13 +22,14 @@ import {ApartmentService} from "../apartment/ApartmentService";
                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>
                     <label class="mdl-textfield__label" for="taskdesc">Task Description</label>
                   </div> <br/>
-                <!--  <select [(ngModel)]="data.taskstatus">
-                      <option *ngFor="#taskstatus of dropdownValues" [ngValue]="taskstatus">{{taskstatus}}</option>
-                  </select> -->
+                 <select [(ngModel)]="data.assignedto">
+                      <option *ngFor="#assign of dropdownValues" [ngValue]="assign.userEmail">{{assign.userEmail}}</option>
+                  </select>
       
-                <br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
-                </form>
-          </div>
+                <br/><br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
+                </form>          
+          </div>       
+
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
@@ -85,19 +86,24 @@ import {ApartmentService} from "../apartment/ApartmentService";
     directives: [ROUTER_DIRECTIVES, MDL]
 })
 
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnInit {
 
     data: any;
 
-    public dropdownValues= ["OPEN","CLOSED"];
+    //public dropdownValues= ["OPEN","CLOSED"];
+    public dropdownValues: Object[];
 
-    constructor(private apartmentService: ApartmentService) {
-    this.data = {};
+    constructor(private apartmentService: ApartmentService,private router: Router) {
+    this.data = {};            
     }
 
+     ngOnInit() {
+       this.apartmentService.getUsersList().subscribe(res => this.dropdownValues = res);       
+     }
+
     onSubmit(form) {
-    console.log(JSON.stringify(this.data));
-    this.apartmentService.postTasks(this.data);
+    console.log(JSON.stringify(this.data));    
+    this.apartmentService.postTasks(this.data).then(_=>this.router.navigate(['Tasks']));   
     this.data = {};
     }
 
