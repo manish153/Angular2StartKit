@@ -211,4 +211,18 @@ router.get('/api',authCheck, function(req, res) {
         });
     });
 
+    router.route('/api/mark/:_id')  
+    .put(function(req, res) {
+        Task.findById(req.params._id, function(err, task) {
+            if (err)
+                res.send(err);
+            task.taskstatus = 'CLOSED';              
+            task.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'task updated!' });
+            });
+        });
+    })  
+
 app.use('/', router);

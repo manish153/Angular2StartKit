@@ -1,5 +1,5 @@
 import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES, Router} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {ApartmentService} from "../apartment/ApartmentService";
 import {SharedService} from "../../services/SharedService";
@@ -17,14 +17,15 @@ import {SharedService} from "../../services/SharedService";
                 <h2 class="mdl-card__title-text">{{task.taskname}}</h2>
                 </div>
                 <div class="mdl-card__supporting-text mdl-color-text--grey-600">
-                {{task.taskdesc}}
+                {{task.taskdesc}}  {{task.taskstatus}}
                 </div>
                 <div class="mdl-card__actions mdl-card--border">                
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Mark Completed</a>
-                
-                <!--<a [routerLink]="['/EditTask', {data: task.taskname, data2: task.taskdesc}, {data2: task.taskdesc}]"  class="mdl-button mdl-js-button mdl-js-ripple-effect">EDIT</a>-->
-                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>              
+               
+                <a *ngIf="task.taskstatus=='OPEN'" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickMark(task)">Mark Completed</a>
+                <a [routerLink]="['/AllTasks']" *ngIf="task.taskstatus=='CLOSED'" class="mdl-button mdl-js-button mdl-js-ripple-effect">Completed</a>
+                                
+                <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickEdit(task)">EDIT</a>              
                 </div>
              </div>          
           </div>
@@ -89,13 +90,19 @@ import {SharedService} from "../../services/SharedService";
 
 export class AllTasksComponent implements OnInit {
   public tasks: Object[];
-    constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
+  data: any;
+    constructor(private apartmentService: ApartmentService, private sharedService: SharedService,private router: Router) { }
 
     ngOnInit() {
     this.apartmentService.getAllTasks().subscribe(res => this.tasks = res);    
     }
 
-    onClick1(task){
+    onClickEdit(task){
       this.sharedService.temp = task;      
+    }
+
+    onClickMark(task){
+       this.data  = task;
+       this.apartmentService.markCompleted(this.data).then(_=>this.router.navigate(['Tasks']));    
     }
 }

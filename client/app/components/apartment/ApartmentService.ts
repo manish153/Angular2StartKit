@@ -47,8 +47,7 @@ export class ApartmentService {
         return this.http.get('./api/newtask').map((res: Response) => res.json());
     }
 
-    updateTask(data:any){
-        
+    updateTask(data:any){        
         return new Promise((resolve,reject)=> {
           this.http.put(`./api/newtask/${data._id}`,
           JSON.stringify(data),{ 
@@ -65,7 +64,15 @@ export class ApartmentService {
 
     deleteTask() { }
 
-    markCompleted() { }
+    markCompleted(data:any) { 
+         return new Promise((resolve,reject)=> {
+          this.http.put(`./api/mark/${data._id}`,
+          JSON.stringify(data),{ 
+             headers: new Headers({'Content-Type':'application/json'})
+        })
+        .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error))
+      });   
+    }
 
 
 }

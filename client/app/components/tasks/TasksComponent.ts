@@ -1,5 +1,5 @@
 import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {ROUTER_DIRECTIVES,Router} from "angular2/router";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {ApartmentService} from "../apartment/ApartmentService";
 import {SharedService} from "../../services/SharedService";
@@ -21,9 +21,10 @@ import {SharedService} from "../../services/SharedService";
                 </div>
                 <div class="mdl-card__actions mdl-card--border">                
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">Mark Completed</a>
                 
-                <!--<a [routerLink]="['/EditTask', {data: task.taskname, data2: task.taskdesc}, {data2: task.taskdesc}]"  class="mdl-button mdl-js-button mdl-js-ripple-effect">EDIT</a>-->
+                               
+                <a [routerLink]="['/AllTasks']" *ngIf="task.taskstatus=='OPEN'" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickMark(task)">Mark Completed</a>
+                <a [routerLink]="['/Tasks']" *ngIf="task.taskstatus=='CLOSED'" class="mdl-button mdl-js-button mdl-js-ripple-effect">Completed</a>
                 <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>               
                 </div>
              </div>          
@@ -90,8 +91,9 @@ import {SharedService} from "../../services/SharedService";
 export class TasksComponent implements OnInit {
 
     public tasks: Object[];
+    data: any;
     userEmail = JSON.parse(localStorage.getItem('profile'));
-    constructor(private apartmentService: ApartmentService, private sharedService: SharedService) { }
+    constructor(private apartmentService: ApartmentService, private sharedService: SharedService,private router: Router) { }
 
     ngOnInit() {
     console.log(this.userEmail.email);  
@@ -103,5 +105,10 @@ export class TasksComponent implements OnInit {
     onClick1(task){
       this.sharedService.temp = task;
       console.log('value in the shared service ' + JSON.stringify(this.sharedService.temp))
+    }
+
+    onClickMark(task){
+       this.data  = task;
+       this.apartmentService.markCompleted(this.data).then(_=>this.router.navigate(['AllTasks']));    
     }
 }
