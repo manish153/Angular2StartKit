@@ -111,7 +111,7 @@ export class TasksComponent implements OnInit {
        this.data  = task;
       //this.apartmentService.markCompleted(this.data).then(_=>this.router.navigate(['AllTasks']));    
         this.apartmentService.markCompleted(this.data).then(() => {     
-        var index = this.tasks.findIndex((task) => this.data);
+        var index = this.tasks.findIndex((task) => this.data ==task);
         this.tasks.splice(index, 1);
         });
     }
