@@ -23,7 +23,7 @@ import {SharedService} from "../../services/SharedService";
                 <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
                 
                                
-                <a [routerLink]="['/AllTasks']" *ngIf="task.taskstatus=='OPEN'" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickMark(task)">Mark Completed</a>
+                <a *ngIf="task.taskstatus=='OPEN'" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickMark(task)">Mark Completed</a>
                 <a [routerLink]="['/Tasks']" *ngIf="task.taskstatus=='CLOSED'" class="mdl-button mdl-js-button mdl-js-ripple-effect">Completed</a>
                 <a [routerLink]="['/EditTask']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick1(task)">EDIT</a>               
                 </div>
@@ -109,6 +109,10 @@ export class TasksComponent implements OnInit {
 
     onClickMark(task){
        this.data  = task;
-       this.apartmentService.markCompleted(this.data).then(_=>this.router.navigate(['AllTasks']));    
+      //this.apartmentService.markCompleted(this.data).then(_=>this.router.navigate(['AllTasks']));    
+        this.apartmentService.markCompleted(this.data).then(() => {     
+        var index = this.tasks.findIndex((task) => this.data);
+        this.tasks.splice(index, 1);
+        });
     }
 }
