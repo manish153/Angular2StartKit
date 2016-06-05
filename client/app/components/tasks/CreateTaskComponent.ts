@@ -14,9 +14,8 @@ import {ApartmentService} from "../apartment/ApartmentService";
 
                 <form action="#" (ngSubmit)="onSubmit()">
                   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="[A-Z,a-z]*" id="taskname" [(ngModel)]="data.taskname"/>
-                    <label class="mdl-textfield__label" for="taskname">Task Name</label>
-                    <span class="mdl-textfield__error">Only alphabet and no spaces, please!</span>
+                    <input class="mdl-textfield__input" type="text" id="taskname" [(ngModel)]="data.taskname"/>
+                    <label class="mdl-textfield__label" for="taskname">Task Name</label>                   
                    </div> <br/>
                   <div class="mdl-textfield mdl-js-textfield">
                     <textarea class="mdl-textfield__input" type="text" rows= "5" id="taskdesc" [(ngModel)]="data.taskdesc"></textarea>

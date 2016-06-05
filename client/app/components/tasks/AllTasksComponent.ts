@@ -44,7 +44,7 @@ import {SharedService} from "../../services/SharedService";
                 <a [routerLink]="['../Tasks']" class="mdl-button mdl-js-button mdl-js-ripple-effect">My tasks</a>
               </div>
             </div>
-            <div class="demo-separator mdl-cell--1-col"></div>
+            <!-- <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
                 <h3>View options</h3>
@@ -81,7 +81,7 @@ import {SharedService} from "../../services/SharedService";
                 <i class="material-icons">location_on</i>
               </div>
             </div>
-          </div>
+          </div>  -->
          </div>
     `,
     directives: [ROUTER_DIRECTIVES,MDL]
