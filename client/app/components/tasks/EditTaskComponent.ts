@@ -95,6 +95,7 @@ export class EditTaskComponent {
     }
 
     onSubmit(form) {    
+     console.log(JSON.stringify(this.data)); 
     this.apartmentService.updateTask(this.data).then(_=>this.router.navigate(['Tasks']));    
     }
 

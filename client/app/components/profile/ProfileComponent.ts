@@ -86,18 +86,16 @@ export class ProfileComponent implements OnInit {
     myForm: ControlGroup;
     isEdit: boolean = false;
     userEmail = JSON.parse(localStorage.getItem('profile'));
-    public profileObject: Object[];
-
+    profileObject: any;
 
     constructor(private fb: FormBuilder, private apartmentService: ApartmentService) {
         this.apartmentService = apartmentService;
     }
 
 
-    onSubmit(form) {
-        console.log(this.myForm);
+    onSubmit() {      
+        this.apartmentService.updateProfile(this.profileObject[0]);
         this.isEdit = false;
-        //post to rest API
     };
 
     ngOnInit(): any {

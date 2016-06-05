@@ -64,7 +64,7 @@ router.get('/api',authCheck, function(req, res) {
   })
 
   .get(function(req, res) {
-        Apartment.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',function(err, apartments) {
+        Apartment.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',{sort:{unitID: 1}},function(err, apartments) {
             if (err)
                 res.send(err);
 
@@ -90,10 +90,24 @@ router.get('/api',authCheck, function(req, res) {
             
         });
     })
+
+    router.route('/api/apartments/updateprofile/:_id')    
+    .put(function(req, res) {
+        Apartment.findById(req.params._id, function(err, apartment) {
+            if (err)
+            res.send(err);
+            apartment.userFirstName = req.body.userFirstName;  
+            apartment.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'user profile updated!' });
+            });
+        });
+    })
   
     router.route('/api/apartments/getprofile/:userEmail')    
     .get(function(req, res) {
-        Apartment.find({userEmail:req.params.userEmail},'-_id', function(err, apartment) {
+        Apartment.find({userEmail:req.params.userEmail},function(err, apartment) {
             if (err)
                 res.send(err);
             res.json(apartment);
@@ -109,30 +123,6 @@ router.get('/api',authCheck, function(req, res) {
    //      res.send(Apartment);
    //  });
    // })
-
-    .put(function(req, res) {
-        Apartment.findById(req.params.apartment_id, function(err, apartment) {
-            if (err)
-                res.send(err);
-            apartment.name = req.body.name;  
-            apartment.save(function(err) {
-                if (err)
-                    res.send(err);
-                res.json({ message: 'apartment updated!' });
-            });
-        });
-    })
-
-    .delete(function(req, res) {
-        Apartment.remove({
-            _id: req.params.apartment_id
-        }, function(err, apartment) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully deleted' });
-        });
-    });
 
     router.route('/api/businessunits')             
     .get(function(req, res) {

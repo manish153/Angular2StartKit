@@ -103,6 +103,7 @@ export class TasksComponent implements OnInit {
     }
 
     onClick1(task){
+      console.log(JSON.stringify(task));
       this.sharedService.temp = task;
       console.log('value in the shared service ' + JSON.stringify(this.sharedService.temp))
     }
