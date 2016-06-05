@@ -1,7 +1,6 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 import {DashboardComponent} from "../app/DashboardComponent";
-import {BusinessUnitService} from "./BusinessUnitService";
 import {ApartmentComponent} from "./ApartmentComponent";
 import {BusinessUnitComponent} from "./BusinessUnitComponent";
 
@@ -17,8 +16,7 @@ import {BusinessUnitComponent} from "./BusinessUnitComponent";
   template: `<router-outlet></router-outlet>
     `,
 
-    directives: [ROUTER_DIRECTIVES],
-    providers: [BusinessUnitService]
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class BusinessRootComponent {

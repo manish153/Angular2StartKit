@@ -1,8 +1,8 @@
 import {Component, OnInit, Inject} from 'angular2/core';
 import {ROUTER_DIRECTIVES,RouteConfig} from "angular2/router";
 import {DashboardComponent} from "../app/DashboardComponent";
-import {BusinessUnitService} from "./BusinessUnitService";
 import {ApartmentComponent} from "./ApartmentComponent";
+import {ApartmentService} from "./ApartmentService";
 
 
 @Component({
@@ -21,18 +21,18 @@ import {ApartmentComponent} from "./ApartmentComponent";
     </div>          
     `,
 
-    directives: [ROUTER_DIRECTIVES],
-    providers: [BusinessUnitService]
+    directives: [ROUTER_DIRECTIVES]
+    //,providers: [BusinessUnitService]
 })
 
 export class BusinessUnitComponent implements OnInit {
     public businessUnits: Object[];
 
-    constructor(private businessUnitService: BusinessUnitService) {
-    this.businessUnitService = businessUnitService;
+    constructor(private apartmentService: ApartmentService) {
+    this.apartmentService = apartmentService;
     }
 
     ngOnInit() {
-    this.businessUnitService.getBU().subscribe(res => this.businessUnits = res);    
+    this.apartmentService.getBU().subscribe(res => this.businessUnits = res);    
     }
 }

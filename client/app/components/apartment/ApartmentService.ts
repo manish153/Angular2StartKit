@@ -11,6 +11,10 @@ export class ApartmentService {
     }
 
     /*APARTMENT SERVICE METHODS*/
+    getBU() {
+        return this.http.get('./api/businessunits').map((res: Response) => res.json());
+    }
+
     getApartments() {
         return this.http.get('./api/apartments').map((res: Response) => res.json());
     }
