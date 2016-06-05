@@ -106,7 +106,7 @@ router.get('/api',authCheck, function(req, res) {
    //Business Unit Service endpoints 
     router.route('/api/businessunits')             
     .get(function(req, res) {
-        BusinessUnit.find(function(err, businessunits) {
+        BusinessUnit.find({BusinessUnitName: {$exists: true}},function(err, businessunits) {
             if (err)
                 res.send(err);
 
