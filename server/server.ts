@@ -51,27 +51,6 @@ router.get('/api',authCheck, function(req, res) {
    res.json({ message: 'hooray! welcome to our api!' });
 });
 
-   router.route('/api/apartments')
-    .post(function(req, res) {        
-        var apartment = new Apartment();
-        apartment.UnitAddress = req.body.taskname;
-
-        apartment.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json({ message: 'Apartment created!' });
-        });
-  })
-
-  .get(function(req, res) {
-        Apartment.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',{sort:{unitID: 1}},function(err, apartments) {
-            if (err)
-                res.send(err);
-
-            res.json(apartments);
-        });
-  });
-
   router.route('/api/apartments/:apartment_id')    
     .get(function(req, res) {
         Apartment.findById(req.params.apartment_id, function(err, apartment) {
@@ -123,7 +102,8 @@ router.get('/api',authCheck, function(req, res) {
    //      res.send(Apartment);
    //  });
    // })
-
+    
+   //Business Unit Service endpoints 
     router.route('/api/businessunits')             
     .get(function(req, res) {
         BusinessUnit.find(function(err, businessunits) {
@@ -133,7 +113,16 @@ router.get('/api',authCheck, function(req, res) {
             res.json(businessunits);
         });
   });
-  
+
+    router.route('/api/businessunits/butype')             
+    .get(function(req, res) {
+        BusinessUnit.find({unitID: {$exists: true}, UnitType: {$exists: true}},'unitID UnitType',{sort:{unitID: 1}},function(err, businessunits) {
+            if (err)
+                res.send(err);
+
+            res.json(businessunits);
+         });
+   });     
   /*Task Endpoints*/
 
   router.route('/api/newtask')

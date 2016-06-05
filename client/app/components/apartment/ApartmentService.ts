@@ -16,15 +16,7 @@ export class ApartmentService {
     }
 
     getApartments() {
-        return this.http.get('./api/apartments').map((res: Response) => res.json());
-    }
-
-    postApartment(data: any) {
-        return this.http.post('/api/apartments',
-            JSON.stringify(data), {
-                headers: new Headers({ 'Content-Type': 'application/json' })
-            })
-            .map((res: Response) => res.json()).subscribe();
+        return this.http.get('./api/businessunits/butype').map((res: Response) => res.json());
     }
 
     /*PROFILE SERVICE METHODS*/
