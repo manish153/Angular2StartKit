@@ -20,7 +20,7 @@ import {SharedService} from "../../services/SharedService";
                 {{task.taskdesc}}  {{task.taskstatus}}
                 </div>
                 <div class="mdl-card__actions mdl-card--border">                
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect">{{task.assignedto}}</a>
                
                 <a *ngIf="task.taskstatus=='OPEN'" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickMark(task)">Mark Completed</a>
                 <a [routerLink]="['/AllTasks']" *ngIf="task.taskstatus=='CLOSED'" class="mdl-button mdl-js-button mdl-js-ripple-effect">Completed</a>

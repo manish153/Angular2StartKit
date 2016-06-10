@@ -92,8 +92,8 @@ export class ProfileComponent implements OnInit {
         this.apartmentService = apartmentService;
     }
 
-
-    onSubmit() {      
+    onSubmit() {  
+        console.log(JSON.stringify(this.profileObject[0]));    
         this.apartmentService.updateProfile(this.profileObject[0]);
         this.isEdit = false;
     };

@@ -18,6 +18,19 @@ export class ApartmentService {
     getApartments() {
         return this.http.get('./api/businessunits/butype').map((res: Response) => res.json());
     }
+    
+    getStats(){ 
+        console.log('Request reached');
+        return this.http.get('./api/apartments/getstats').map((res: Response) => res.json());
+    }
+
+    getDetails(aptType: string, aptStatus: string){
+        console.log('request reached getDetails' +aptType +aptStatus)
+        return this.http.get(`./api/apartments/getdetails/${aptType}/${aptStatus}`).map((res: Response) => res.json());
+    }
+
+
+
 
     /*PROFILE SERVICE METHODS*/
     getProfile(userEmail: string) {

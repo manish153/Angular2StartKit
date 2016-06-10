@@ -51,15 +51,6 @@ router.get('/api',authCheck, function(req, res) {
    res.json({ message: 'hooray! welcome to our api!' });
 });
 
-  router.route('/api/apartments/:apartment_id')    
-    .get(function(req, res) {
-        Apartment.findById(req.params.apartment_id, function(err, apartment) {
-            if (err)
-                res.send(err);
-            res.json(apartment);
-        });
-    });
-
   router.route('/api/getusers')    
     .get(function(req, res) {        
         Apartment.find({userEmail: {$exists: true, $ne: null}},'userEmail', function(err, apartments) {
@@ -122,7 +113,32 @@ router.get('/api',authCheck, function(req, res) {
 
             res.json(businessunits);
          });
-   });     
+   });   
+
+    // db.contest.aggregate([
+//     {"$group" : {_id:"$province", count:{$sum:1}}}
+// ])
+
+    router.route('/api/apartments/getstats')             
+    .get(function(req, res) {
+        //Apartment.aggregate([{$match:{_id: "aptType"}},{$group:{_id:{aptType:"$aptType"},count:{$sum:1}}}],function(err, apartments) {
+          Apartment.find('aptType',function(err, apartments) {
+            if (err)
+                res.send(err);
+            res.json(apartments);
+         });
+   });       
+ 
+   router.route('/api/apartments/getdetails/:aptType/:aptStatus')             
+    .get(function(req, res) {        
+          Apartment.find({$and:[{aptType:req.params.aptType},{aptStatus:req.params.aptStatus}]}, function(err, apartments) {
+            if (err)
+                res.send(err);
+            res.json(apartments);
+         });
+   });       
+
+
   /*Task Endpoints*/
 
   router.route('/api/newtask')

@@ -73,7 +73,7 @@ import {SharedService} from "../../services/SharedService";
                 </ul>
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-grey-50">Change location</a>
                 <div class="mdl-layout-spacer"></div>
                 <i class="material-icons">location_on</i>
               </div>
@@ -95,7 +95,7 @@ export class EditTaskComponent {
     }
 
     onSubmit(form) {    
-     console.log(JSON.stringify(this.data)); 
+    console.log(JSON.stringify(this.data)); 
     this.apartmentService.updateTask(this.data).then(_=>this.router.navigate(['Tasks']));    
     }
 
