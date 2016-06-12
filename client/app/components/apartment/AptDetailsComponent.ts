@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject} from 'angular2/core';
-import {ROUTER_DIRECTIVES,RouteParams} from "angular2/router";
+import {ROUTER_DIRECTIVES,RouteParams,CanReuse,ComponentInstruction} from "angular2/router";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentService} from "./ApartmentService";
 import {SharedService} from "../../services/SharedService"; 
@@ -17,7 +17,7 @@ import {SharedService} from "../../services/SharedService";
               {{aptdetails.aptDesc}}  
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.aptType}}</a>
+                <a [routerLink]="['AptContent']" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.aptType}}</a>
                 <a *ngIf="aptdetails.aptStatus=='Available'" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.aptStatus}}</a>
                 <a *ngIf="aptdetails.aptStatus=='Leased'" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.leaseEndDate}}</a>
                 <a class="mdl-button mdl-js-button mdl-js-ripple-effect">$ {{aptdetails.rentAmount}}</a>
@@ -29,7 +29,7 @@ import {SharedService} from "../../services/SharedService";
     directives: [ROUTER_DIRECTIVES]
 })
 
-export class AptDetailsComponent implements OnInit {
+export class AptDetailsComponent implements OnInit, CanReuse {
 
     aptDetails: any;
     data: any;
@@ -50,4 +50,8 @@ export class AptDetailsComponent implements OnInit {
          console.log(JSON.stringify(this.aptDetails)); 
         });
     }
+
+    routerCanReuse(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction) {
+    return true;
+  }
 }

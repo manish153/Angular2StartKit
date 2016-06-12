@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var jwt = require('express-jwt');
 var cors = require('cors');
 var router = express.Router();
+var multer = require("multer");
 
 var Apartment = require('./models/apartment');
 var BusinessUnit = require('./models/businessunit'); 
@@ -15,6 +16,20 @@ var Task = require('./models/task');
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+
+app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
+    //(res.send(req['files'])); 
+    (res.send(req.files)); 
+});
 
 var dbstring =
     process.env.MONGOLAB_URI ||
@@ -40,8 +55,7 @@ mongoose.connect(dbstring, function (err, res) {
       };
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 
 router.get('/app/*', function(req, res) {
    res.sendFile(path.resolve(__dirname, 'index.html'));

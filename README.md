@@ -1,3 +1,3 @@
-# Angular2 Beta with Gulp, Typescript, and Express  
+# Angular2 Test project
 
-Sample project 
+Not working currently .. 
