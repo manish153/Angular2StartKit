@@ -17,7 +17,7 @@ import {SharedService} from "../../services/SharedService";
               {{aptdetails.aptDesc}}  
               </div>
               <div class="mdl-card__actions mdl-card--border">
-                <a [routerLink]="['AptContent']" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.aptType}}</a>
+                <a [routerLink]="['AptContent']" class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClick(aptdetails)">{{aptdetails.aptType}}</a>
                 <a *ngIf="aptdetails.aptStatus=='Available'" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.aptStatus}}</a>
                 <a *ngIf="aptdetails.aptStatus=='Leased'" class="mdl-button mdl-js-button mdl-js-ripple-effect">{{aptdetails.leaseEndDate}}</a>
                 <a class="mdl-button mdl-js-button mdl-js-ripple-effect">$ {{aptdetails.rentAmount}}</a>
@@ -47,8 +47,13 @@ export class AptDetailsComponent implements OnInit, CanReuse {
     ngOnInit(){
        this.apartmentService.getDetails(this.UnitType,this.aptStatus).subscribe(res =>
         {this.aptDetails = res
-         console.log(JSON.stringify(this.aptDetails)); 
+         console.log(JSON.stringify(this.aptDetails));          
         });
+    }
+
+    onClick(aptdetails){
+      this.sharedService.temp=aptdetails;
+      console.log(JSON.stringify(this.sharedService.temp));
     }
 
     routerCanReuse(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction) {

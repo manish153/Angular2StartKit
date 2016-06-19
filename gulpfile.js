@@ -11,31 +11,28 @@ gulp.task('clean', function() {
     return del('dist')
 });
 
-/*gulp.task('move-models',function(){
-    return gulp.src(['server/models/bear.js'], {base: './models/'})
-    .pipe(gulp.dest('dist'));
-
-});*/
-
 gulp.task('move-models', function() {
     return gulp.src('server/models/*') //to move multiple files with fodler structure use 'base' property. check css move for syntax
         .pipe(gulp.dest('dist/models'));
 
 });
 
+gulp.task('move-uploads', function() {
+    return gulp.src('uploads/*') //to move multiple files with fodler structure use 'base' property. check css move for syntax
+        .pipe(gulp.dest('dist/uploads'));
+});
+
 gulp.task('move-css', function() {
-    return gulp.src(['client/app/assets/styles.css', 'client/app/assets/images/*'], {
+    return gulp.src(['client/app/assets/styles.css', 'client/app/assets/images/*','client/app/assets/js/*'], {
             base: 'client/'
         }) //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('move-template', function() {
-    return gulp.src('client/app/templates/*') //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
-        .pipe(gulp.dest('dist/app/templates'));
-});
-
-
+// gulp.task('move-template', function() {
+//     return gulp.src('client/app/templates/*') //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
+//         .pipe(gulp.dest('dist/app/templates'));
+// });
 
 gulp.task('build:server', function() {
     var tsProject = ts.createProject('server/tsconfig.json');
@@ -47,7 +44,6 @@ gulp.task('build:server', function() {
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist'))
 });
-
 
 // CLIENT
 
@@ -61,8 +57,8 @@ var jsNPMDependencies = [
     'angular2/bundles/angular2.dev.js',
     'angular2/bundles/router.dev.js',
     'angular2-jwt/angular2-jwt.js',
-    'angular2/bundles/http.dev.js'
-
+    'file-saver/FileSaver.js',
+    'angular2/bundles/http.dev.js',    
 ]
 
 gulp.task('build:index', function() {
@@ -79,6 +75,7 @@ gulp.task('build:index', function() {
     //Let's copy our index into dist   
     var copyIndex = gulp.src('client/index.html')
         .pipe(gulp.dest('dist'))
+
     return [copyJsNPMDependencies, copyIndex];
 });
 
@@ -94,7 +91,7 @@ gulp.task('build:app', function() {
 
 
 gulp.task('build', function(callback) {
-    runSequence('clean', 'move-models', 'move-template', 'move-css', 'build:server', 'build:index', 'build:app', callback);
+    runSequence('clean', 'move-models','move-uploads', 'move-css', 'build:server', 'build:index', 'build:app', callback);
 });
 
 gulp.task('default', ['build']);

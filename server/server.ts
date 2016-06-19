@@ -7,17 +7,22 @@ var mongoose = require('mongoose');
 var jwt = require('express-jwt');
 var cors = require('cors');
 var router = express.Router();
-var multer = require("multer");
+var multer = require('multer');
+var serveIndex = require('serve-index');
 
 var Apartment = require('./models/apartment');
 var BusinessUnit = require('./models/businessunit'); 
 var Task = require('./models/task');
+var FileMongo = require('./models/file');
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')));
+app.use('/filesdirectory', serveIndex(__dirname + '/uploads'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -25,10 +30,22 @@ app.use(function(req, res, next) {
     next();
 });
 
-
-app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
-    //(res.send(req['files'])); 
+app.post("/uploads", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
+    var filemongo = new FileMongo();
+        filemongo.originalname = req.files[0].originalname;
+        filemongo._idapt = req.body._idapt;
+        console.log(req.body);
+        filemongo.save(function(err) {
+            //if (err)
+               // res.send(err);
+            //res.json({ message: 'File uploaded!' });
+        });        
     (res.send(req.files)); 
+});
+
+app.get('/download', function(req, res){
+  var file = '/uploads/e4bc8831547dcb0be7333bbce387de5b';
+  res.download(file); // Set disposition and send it.
 });
 
 var dbstring =
@@ -54,8 +71,6 @@ mongoose.connect(dbstring, function (err, res) {
       console.log ('Successfully connected to: ' + dbstring);
       };
 });
-
-
 
 router.get('/app/*', function(req, res) {
    res.sendFile(path.resolve(__dirname, 'index.html'));
