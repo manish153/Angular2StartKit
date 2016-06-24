@@ -4,9 +4,6 @@ import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class UploadService {
-  // progress$:any;
-  // progressObserver:any;
-  // progress: number = 1
 
   constructor () {}
 
@@ -21,7 +18,7 @@ export class UploadService {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        resolve(JSON.parse(xhr.response));
+                        resolve(JSON.parse(xhr.response || null));
                     } else {
                         reject(xhr.response);
                     }
@@ -31,9 +28,6 @@ export class UploadService {
             xhr.send(formData);
             console.log(xhr.responseText);
         });
-    }
-
-
-    
+    }    
  }
 

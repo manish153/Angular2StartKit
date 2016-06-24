@@ -8,12 +8,28 @@ var jwt = require('express-jwt');
 var cors = require('cors');
 var router = express.Router();
 var multer = require('multer');
+var multers3 = require('multer-s3');
 var serveIndex = require('serve-index');
+var aws = require('aws-sdk')
 
 var Apartment = require('./models/apartment');
 var BusinessUnit = require('./models/businessunit'); 
+var Files = require('./models/file');
 var Task = require('./models/task');
 var FileMongo = require('./models/file');
+var s3 = new aws.S3({ /* ... */ })
+//var filelocation;
+
+var upload = multer({
+    storage: multers3({
+        s3:s3,       
+        bucket: 'angular2files',
+        key: function (req,file, cb) {
+              cb(null, file.originalname); //use Date.now() for unique file key           
+  //            filelocation = file.location;
+        }
+    })
+});
 
 app.use('/app', express.static(path.resolve(__dirname, 'app')));
 app.use('/libs', express.static(path.resolve(__dirname, 'libs')));
@@ -30,23 +46,34 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.post("/uploads", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
-    var filemongo = new FileMongo();
-        filemongo.originalname = req.files[0].originalname;
-        filemongo._idapt = req.body._idapt;
-        console.log(req.body);
-        filemongo.save(function(err) {
-            //if (err)
-               // res.send(err);
-            //res.json({ message: 'File uploaded!' });
-        });        
+// app.post("/uploads", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
+//         var filemongo = new FileMongo();
+//         filemongo.originalname = req.files[0].originalname;
+//         filemongo._idapt = req.body._idapt;
+//         console.log(req.body);
+//         filemongo.save(function(err) {
+//         });        
+//     (res.send(req.files)); 
+// });
+
+//duplicate files are not handled, best would be to send multer filename to aws
+app.post('/s3upload', upload.array('uploads[]',12), function (req, res, next) {
+         var filemongo = new FileMongo();
+         filemongo.originalname = req.files[0].originalname;
+         filemongo._idapt = req.body._idapt;
+         filemongo.createddate = Date.now();
+    //     console.log(filelocation);         
+         filemongo.save(function(err) {
+        });
     (res.send(req.files)); 
+//  res.send("Uploaded!");
 });
 
-app.get('/download', function(req, res){
-  var file = '/uploads/e4bc8831547dcb0be7333bbce387de5b';
-  res.download(file); // Set disposition and send it.
-});
+
+// app.get('/download', function(req, res){
+//   var file = '/uploads/e4bc8831547dcb0be7333bbce387de5b';
+//   res.download(file); // Set disposition and send it.
+// });
 
 var dbstring =
     process.env.MONGOLAB_URI ||
@@ -167,6 +194,16 @@ router.get('/api',authCheck, function(req, res) {
          });
    });       
 
+
+    router.route('/api/apartments/files/:_idapt')             
+    .get(function(req, res) {        
+          Files.find({_idapt:req.params._idapt}, function(err, files) {
+          //Files.find({_idapt:req.params._idapt}).sort({'createddate.$date': 1}).toArray(function(err, files) {
+            if (err)
+                res.send(err);
+            res.json(files);
+        });
+   });  
 
   /*Task Endpoints*/
 

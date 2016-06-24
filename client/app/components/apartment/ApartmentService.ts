@@ -29,8 +29,9 @@ export class ApartmentService {
         return this.http.get(`./api/apartments/getdetails/${aptType}/${aptStatus}`).map((res: Response) => res.json());
     }
 
-
-
+    getFiles(_idapt: string){
+        return this.http.get(`./api/apartments/files/${_idapt}`).map((res: Response) => res.json());
+    }
 
     /*PROFILE SERVICE METHODS*/
     getProfile(userEmail: string) {

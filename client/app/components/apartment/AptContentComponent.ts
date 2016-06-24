@@ -6,8 +6,6 @@ import {SharedService} from "../../services/SharedService";
 import {UploadService} from "../../services/UploadService";
 import {DownloadService} from "../../services/DownloadService";
 import {Http} from 'angular2/http';
-//import {saveAs} from 'FileSaver';
-// import * as _ from 'FileSaver';
 
 declare var saveAs: any;
 
@@ -70,8 +68,12 @@ declare var saveAs: any;
               <button *ngIf="isEdit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" name="submit" type="submit">submit</button>    
            </form>
          
-              <div><label>Internal _id  </label>{{data._id}}</div>
+              <!--<div><label>Internal _id  </label>{{data._id}}</div>-->
               <div><input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..."></div>                
+
+              <div class="mdl-textfield mdl-js-textfield" *ngFor="#prof of uploadFileName">
+                  <label from="name">Name: {{prof.userFirstName}} </label>                   
+              </div>
        </div>
 
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -89,7 +91,9 @@ declare var saveAs: any;
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
-            
+               <div class="mdl-textfield mdl-js-textfield" *ngFor="#f of filesdata">
+                  <a (click)="downloadFile2()">{{f.originalname}} </a>                   
+              </div>
             </div>
           </div>
          </div> 
@@ -102,38 +106,34 @@ declare var saveAs: any;
 export class AptContentComponent implements OnInit {
 
     data: any;
+    filesdata: any;
     filesToUpload: Array<File>;
     isEdit: boolean = false;
+    uploadFileName: any;
 
     constructor(private apartmentService: ApartmentService, private sharedService: SharedService, params: RouteParams, private uploadService: UploadService, private http: Http) {
         this.filesToUpload = [];
         this.http = http;
     }
 
-
     ngOnInit() {
       this.data = this.sharedService.temp;
+      console.log(this.data._id);
+      this.apartmentService.getFiles(this.data._id).subscribe(res => this.filesdata = res);
+      console.log(this.filesdata);
+   //   this.apartmentService.getProfile('manish.rao@outlook.com').subscribe(res => this.uploadFileName = res);
     }
    
     upload(){
       console.log('upload button clicked');      
-      this.uploadService.makeFileRequest("http://localhost:3000/uploads", [], this.filesToUpload,this.data._id).then((result) => {
-            console.log(result);          
+       //this.uploadService.makeFileRequest("http://localhost:3000/uploads", [], this.filesToUpload,this.data._id).then((result) => {
+       this.uploadService.makeFileRequest("/s3upload", [], this.filesToUpload,this.data._id).then((result) => {
+            console.log(result);  
+            this.apartmentService.getFiles(this.data._id).subscribe(res => this.filesdata = res);                       
         }, (error) => {
             console.error(error);
         });
     }
-
-    // downloadFile() {
-    // this.http.get(
-    //   'http://localhost:3000/uploads/test.pdf').subscribe(
-    //     (response) => {
-    //       var mediaType = 'application/pdf';
-    //       var blob = new Blob([response._body], {type: mediaType});
-    //       var filename = 'test.pdf';
-    //       filesaver.saveAs(blob, filename);
-    //     });
-    // }
 
     downloadFile2(){
         let xhr = new XMLHttpRequest();        
@@ -141,16 +141,13 @@ export class AptContentComponent implements OnInit {
         xhr.open('GET', url, true);
         xhr.responseType = 'blob';
 
-         xhr.onreadystatechange = function() {
-            
+         xhr.onreadystatechange = function() {            
             // If we get an HTTP status OK (200), save the file using fileSaver
             if(xhr.readyState === 4 && xhr.status === 200) {
                 var blob = new Blob([this.response], {type: 'application/pdf'});
                 saveAs(blob, 'Report.pdf');
             }
         };
-
-        // Start the Ajax request
         xhr.send();
     }
 
