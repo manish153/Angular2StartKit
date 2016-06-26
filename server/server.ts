@@ -24,9 +24,10 @@ var upload = multer({
     storage: multers3({
         s3:s3,       
         bucket: 'angular2files',
-        key: function (req,file, cb) {
+        key: function (req,file, cb,res) {
               cb(null, file.originalname); //use Date.now() for unique file key           
   //            filelocation = file.location;
+  //            res.send(file);
         }
     })
 });
@@ -62,7 +63,7 @@ app.post('/s3upload', upload.array('uploads[]',12), function (req, res, next) {
          filemongo.originalname = req.files[0].originalname;
          filemongo._idapt = req.body._idapt;
          filemongo.createddate = Date.now();
-    //     console.log(filelocation);         
+       //  console.log(this.file.location);         
          filemongo.save(function(err) {
         });
     (res.send(req.files)); 
@@ -197,8 +198,9 @@ router.get('/api',authCheck, function(req, res) {
 
     router.route('/api/apartments/files/:_idapt')             
     .get(function(req, res) {        
-          Files.find({_idapt:req.params._idapt}, function(err, files) {
+          //Files.find({_idapt:req.params._idapt}, function(err, files) {
           //Files.find({_idapt:req.params._idapt}).sort({'createddate.$date': 1}).toArray(function(err, files) {
+            Files.find({_idapt:req.params._idapt}).sort({createddate: -1}).limit(3).exec(function(err, files) {
             if (err)
                 res.send(err);
             res.json(files);

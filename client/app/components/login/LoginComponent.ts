@@ -29,5 +29,4 @@ export class LoginComponent {
   static loggedIn() {
     return tokenNotExpired();
   }
-
 }

@@ -67,13 +67,9 @@ declare var saveAs: any;
               <button *ngIf="isEdit" (click)="isEdit=false" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" name="cancel">cancel</button>    
               <button *ngIf="isEdit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" name="submit" type="submit">submit</button>    
            </form>
-         
-              <!--<div><label>Internal _id  </label>{{data._id}}</div>-->
+                       
               <div><input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..."></div>                
 
-              <div class="mdl-textfield mdl-js-textfield" *ngFor="#prof of uploadFileName">
-                  <label from="name">Name: {{prof.userFirstName}} </label>                   
-              </div>
        </div>
 
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
@@ -86,21 +82,28 @@ declare var saveAs: any;
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="upload()">Upload Docs</a>
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="downloadFile2()">download</a>
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Files</a>
               </div>
             </div>
             <div class="demo-separator mdl-cell--1-col"></div>
             <div class="demo-options mdl-card mdl-color--deep-purple-500 mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
+             <div class="mdl-card__supporting-text mdl-color-text--blue-grey-50">
+               <h3>Recently Uploaded Files</h3>
                <div class="mdl-textfield mdl-js-textfield" *ngFor="#f of filesdata">
-                  <a (click)="downloadFile2()">{{f.originalname}} </a>                   
+                <ul> 
+                 <li>
+                  <a (click)="downloadFile2(f)">{{f.originalname}} </a>                   
+                 </li> 
+                </ul>  
               </div>
+             </div> 
             </div>
           </div>
          </div> 
     `,
 
     directives: [ROUTER_DIRECTIVES],
-    providers: [UploadService,DownloadService, { useClass: DownloadService }]      
+    providers: [UploadService]      
 })
 
 export class AptContentComponent implements OnInit {
@@ -109,7 +112,6 @@ export class AptContentComponent implements OnInit {
     filesdata: any;
     filesToUpload: Array<File>;
     isEdit: boolean = false;
-    uploadFileName: any;
 
     constructor(private apartmentService: ApartmentService, private sharedService: SharedService, params: RouteParams, private uploadService: UploadService, private http: Http) {
         this.filesToUpload = [];
@@ -120,8 +122,6 @@ export class AptContentComponent implements OnInit {
       this.data = this.sharedService.temp;
       console.log(this.data._id);
       this.apartmentService.getFiles(this.data._id).subscribe(res => this.filesdata = res);
-      console.log(this.filesdata);
-   //   this.apartmentService.getProfile('manish.rao@outlook.com').subscribe(res => this.uploadFileName = res);
     }
    
     upload(){
@@ -135,17 +135,23 @@ export class AptContentComponent implements OnInit {
         });
     }
 
-    downloadFile2(){
-        let xhr = new XMLHttpRequest();        
-        let url = 'http://localhost:3000/uploads/test.pdf';
+    downloadFile2(f){
+        let xhr = new XMLHttpRequest();   
+        let filename = f.originalname;  
+        console.log(filename);   
+        //let mediatype = ['application/pdf','image/png','image/jpeg'];
+        //let url = 'http://localhost:3000/uploads/test.pdf';
+        //let url = `http://localhost:3000/uploads/${filename}`;
+        
+        let url = `https://angular2files.s3.amazonaws.com/${filename}`;
         xhr.open('GET', url, true);
         xhr.responseType = 'blob';
 
          xhr.onreadystatechange = function() {            
             // If we get an HTTP status OK (200), save the file using fileSaver
             if(xhr.readyState === 4 && xhr.status === 200) {
-                var blob = new Blob([this.response], {type: 'application/pdf'});
-                saveAs(blob, 'Report.pdf');
+                var blob = new Blob([this.response], {type: ''});
+                saveAs(blob, filename);
             }
         };
         xhr.send();

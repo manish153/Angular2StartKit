@@ -99,6 +99,7 @@ export class ProfileComponent implements OnInit {
     };
 
     ngOnInit(): any {
+        console.log(' how is this working '+JSON.stringify(this.userEmail.email));
         this.apartmentService.getProfile(this.userEmail.email).subscribe(res => this.profileObject = res);
         this.myForm = this.fb.group({
             'name': ['', Validators.required],

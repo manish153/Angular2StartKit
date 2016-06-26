@@ -9,14 +9,15 @@ declare var Auth0Lock: any;
 export class AuthService {
 
    zoneImpl: NgZone;
-   user: Object;
+   user: any;
 
    constructor(private router: Router, zone: NgZone) {
       this.zoneImpl = zone;
       this.user = JSON.parse(localStorage.getItem('profile'));
    }
 
-   private useremail;
+  // private useremail;
+   usertemp: any;
    profileUpdated$: Subject<any> = new Subject();
    lock = new Auth0Lock('1mvHGykVHvxzpwstp2wTmrzLrpzouVTm', 'angular2-auth.auth0.com');
 
@@ -28,6 +29,7 @@ export class AuthService {
          }
          localStorage.setItem('profile', JSON.stringify(profile));
          localStorage.setItem('id_token', id_token);
+         console.log(JSON.stringify(profile));
          this.profileUpdated$.next(profile);
          this.zoneImpl.run(() => this.user = profile);
          this.router.navigate(['Dashboard']);
@@ -43,5 +45,5 @@ export class AuthService {
 
    loggedIn() {
       return tokenNotExpired();
-   }
+   }   
 }
