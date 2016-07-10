@@ -1,5 +1,5 @@
-import {Http, Response, Headers} from 'angular2/http'
-import {Injectable} from 'angular2/core'
+import {Http, Response, Headers} from '@angular/http'
+import {Injectable} from '@angular/core'
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -93,6 +93,17 @@ export class ApartmentService {
         })
         .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error))
       });   
+    }
+
+    /*REQUEST SERVICE METHODS*/
+    postRequests(data: any) {
+        return new Promise((resolve,reject)=> {
+         this.http.post('/api/newrequest',
+            JSON.stringify(data), {
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            })
+            .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error));
+          });  
     }
 
 

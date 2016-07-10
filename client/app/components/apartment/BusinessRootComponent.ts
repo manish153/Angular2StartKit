@@ -1,5 +1,5 @@
-import {Component, OnInit, Inject} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
+import {Component, OnInit, Inject} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteConfig} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentComponent} from "./ApartmentComponent";
 import {BusinessUnitComponent} from "./BusinessUnitComponent";

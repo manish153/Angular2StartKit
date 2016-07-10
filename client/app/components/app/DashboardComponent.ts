@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 
 @Component({
@@ -81,11 +81,12 @@ import {Component} from 'angular2/core';
               </div>
             </div>
           </div>
-         </div> `
+        </div> `
 })
 
 export class DashboardComponent {
 
   constructor() { }
+
 
 }

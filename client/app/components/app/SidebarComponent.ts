@@ -1,5 +1,5 @@
-import {Component, Output} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
+import {Component, Output} from '@angular/core';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from '@angular/router-deprecated';
 import {HomeComponent} from '../home/HomeComponent'
 import {DashboardComponent} from './DashboardComponent'
 import {ApartmentComponent} from '../apartment/ApartmentComponent'
@@ -27,19 +27,15 @@ import {AuthService} from '../../services/AuthService'
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           
-          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Dashboard']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a>
-          
-
-          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Tasks']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>My Tasks</a>
-
-          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Requests']" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
-
-          <a *ngIf="isAllowed && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Payments']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Payments</a>
-          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./BusinessRoots']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Apartments</a>
-          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Residents']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Residents</a>
-          <a *ngIf="isAllowed && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Community']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>My Community</a>
-          
-  <!-- *ngIf="service.isAdmin()" -->
+          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Dashboard']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a>          
+          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Tasks']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>My Tasks</a>
+          <a *ngIf="isloggedIn && !isAdmin" class="mdl-navigation__link" [routerLink]="['./Requests']" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
+          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Adminrequest']" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
+          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Payments']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Payments</a>
+          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./BusinessRoots']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Apartments</a>
+          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Residents']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Residents</a>
+          <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Community']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>My Community</a>
+           
           <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
@@ -51,7 +47,7 @@ import {AuthService} from '../../services/AuthService'
 export class SidebarComponent {
 
   user = JSON.parse(localStorage.getItem('profile'));
-  isAllowed: boolean = false;
+  isAdmin: boolean = false;
   isloggedIn: boolean = false;
 
     constructor(private service: AuthService) {
@@ -62,7 +58,7 @@ export class SidebarComponent {
       console.log(this.user.user_metadata['role']);
 
       if(this.user.user_metadata['role'] === 'admin'){
-      this.isAllowed = true
+      this.isAdmin = true
       }
     });
   }
@@ -71,7 +67,7 @@ export class SidebarComponent {
     //this.user = this.service.profileUpdated$.subscribe(profile => { 
     //this.user = profile})
     this.user = 'user@example.com';
-    this.isAllowed = false;
+    this.isAdmin = false;
     this.isloggedIn = false;
     this.service.logout();
   }

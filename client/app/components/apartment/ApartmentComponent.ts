@@ -1,8 +1,8 @@
-import {Component, OnInit, Inject} from 'angular2/core';
-import {ROUTER_DIRECTIVES,RouteConfig} from "angular2/router";
+import {Component, OnInit, Inject} from '@angular/core';
+import {ROUTER_DIRECTIVES,RouteConfig} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentService} from "./ApartmentService";
-import {FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {SharedService} from "../../services/SharedService";
 import {AptDetailsComponent} from "./AptDetailsComponent";
 

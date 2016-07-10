@@ -1,5 +1,5 @@
-import {Injectable, NgZone} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from "angular2/router";
+import {Injectable, NgZone} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router} from "@angular/router-deprecated";
 import {tokenNotExpired} from 'angular2-jwt';
 import {Subject} from 'rxjs/Subject'
 

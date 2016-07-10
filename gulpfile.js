@@ -29,11 +29,6 @@ gulp.task('move-css', function() {
         .pipe(gulp.dest('dist'));
 });
 
-// gulp.task('move-template', function() {
-//     return gulp.src('client/app/templates/*') //to move multiple files with fodler structure use 'base' property. didn't work when tried. 
-//         .pipe(gulp.dest('dist/app/templates'));
-// });
-
 gulp.task('build:server', function() {
     var tsProject = ts.createProject('server/tsconfig.json');
     var tsResult = gulp.src('server/**/*.ts')
@@ -51,14 +46,14 @@ gulp.task('build:server', function() {
   jsNPMDependencies, sometimes order matters here! so be careful!
 */
 var jsNPMDependencies = [
-    'angular2/bundles/angular2-polyfills.js',
+    '@angular/**/index.js',
+    '@angular/**/*.umd.js',
     'systemjs/dist/system.src.js',
-    'rxjs/bundles/Rx.js',
-    'angular2/bundles/angular2.dev.js',
-    'angular2/bundles/router.dev.js',
+    'rxjs/bundles/Rx.js',    
     'angular2-jwt/angular2-jwt.js',
     'file-saver/FileSaver.js',
-    'angular2/bundles/http.dev.js',    
+    'zone.js/dist/zone.js',
+    'reflect-metadata/Reflect.js'
 ]
 
 gulp.task('build:index', function() {

@@ -1,5 +1,5 @@
-import {Component, OnInit, Inject} from 'angular2/core';
-import {ROUTER_DIRECTIVES,RouteParams,CanReuse,ComponentInstruction} from "angular2/router";
+import {Component, OnInit, Inject} from '@angular/core';
+import {ROUTER_DIRECTIVES,RouteParams,CanReuse,ComponentInstruction} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentService} from "./ApartmentService";
 import {SharedService} from "../../services/SharedService"; 

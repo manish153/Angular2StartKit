@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate } from '@angular/router-deprecated';
 import {AuthHttp, AuthConfig, tokenNotExpired, AUTH_PROVIDERS} from 'angular2-jwt';
 
 
@@ -15,6 +15,8 @@ import {AuthRouterOutlet} from './AuthRouterOutlet'
 import {ProfileComponent} from '../profile/ProfileComponent'
 import {ApartmentComponent} from '../apartment/ApartmentComponent'
 import {RequestsComponent} from '../requests/RequestsComponent'
+import {AdminRequestComponent} from '../requests/AdminRequestComponent'
+import {CreateRequestComponent} from '../requests/CreateRequestComponent'
 import {TasksComponent} from '../tasks/TasksComponent'
 import {AllTasksComponent} from '../tasks/AllTasksComponent'
 import {PaymentsComponent} from '../payments/PaymentsComponent'
@@ -33,6 +35,8 @@ import {EditTaskComponent} from '../tasks/EditTaskComponent'
     { path: 'app/profile', component: ProfileComponent, as: 'Profile' },
     //{ path: 'app/apartment', component: ApartmentComponent, as: 'Apartment' },
     { path: 'app/requests', component: RequestsComponent, as: 'Requests' },
+    { path: 'app/adminrequest', component: AdminRequestComponent, as: 'Adminrequest' },
+    { path: 'app/createrequest', component: CreateRequestComponent, as: 'Createrequest' },
     { path: 'app/tasks', component: TasksComponent, as: 'Tasks' },
     { path: 'app/alltasks', component: AllTasksComponent, as: 'AllTasks' },
     { path: 'app/createtask', component: CreateTaskComponent, as: 'CreateTask' },
@@ -45,7 +49,6 @@ import {EditTaskComponent} from '../tasks/EditTaskComponent'
 ])
 @Component({
     selector: 'my-app',
-    /*template: '<router-outlet></router-outlet>',*/
   template: `
     <body>
     <div mdl class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
@@ -55,8 +58,7 @@ import {EditTaskComponent} from '../tasks/EditTaskComponent'
       <main class="mdl-layout__content mdl-color--grey-100">
          
          <auth-router-outlet></auth-router-outlet>
-
-         
+        
       </main>
     </div>
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="position: fixed; left: -1000px; height: -1000px;">

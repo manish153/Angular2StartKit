@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
-import {FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {Component, OnInit, Input} from '@angular/core';
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {SidebarComponent} from '../app/SidebarComponent'
 import {ApartmentService} from '../apartment/ApartmentService'
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement'

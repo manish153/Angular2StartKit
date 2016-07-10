@@ -1,6 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 
-import {ROUTER_DIRECTIVES, CanActivate} from "angular2/router";
+import {ROUTER_DIRECTIVES, CanActivate} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {LoginComponent} from '../login/LoginComponent'
 

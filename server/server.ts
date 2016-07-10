@@ -63,7 +63,8 @@ app.post('/s3upload', upload.array('uploads[]',12), function (req, res, next) {
          filemongo.originalname = req.files[0].originalname;
          filemongo._idapt = req.body._idapt;
          filemongo.createddate = Date.now();
-       //  console.log(this.file.location);         
+         //req.file
+         //console.log(req.file.originalname);         
          filemongo.save(function(err) {
         });
     (res.send(req.files)); 
@@ -216,6 +217,7 @@ router.get('/api',authCheck, function(req, res) {
         task.taskdesc = req.body.taskdesc;
         task.assignedto = req.body.assignedto;
         task.taskstatus = 'OPEN';
+        task.tasktype = 'task';
         task.save(function(err) {
             if (err)
                 res.send(err);
@@ -287,5 +289,22 @@ router.get('/api',authCheck, function(req, res) {
             });
         });
     })  
+
+  /*Request Endpoints*/
+
+  router.route('/api/newrequest')
+    .post(function(req, res) {        
+        var task = new Task();
+        task.taskname = req.body.taskname;
+        task.taskdesc = req.body.taskdesc;
+        //task.assignedto = req.body.assignedto;
+        task.tasktype = 'request';
+        task.save(function(err) {
+            if (err)
+                res.send(err);
+            res.json({ message: 'Request created!' });
+        });
+  })
+
 
 app.use('/', router);

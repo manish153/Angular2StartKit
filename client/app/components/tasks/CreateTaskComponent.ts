@@ -1,7 +1,7 @@
-import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES,Router} from "angular2/router";
+import {Component,OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES,Router,ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
-import {FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {ApartmentService} from "../apartment/ApartmentService";
 
 
@@ -83,6 +83,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
 
     `,
     directives: [ROUTER_DIRECTIVES, MDL]
+    //,providers: [ROUTER_PROVIDERS]
 })
 
 export class CreateTaskComponent implements OnInit {

@@ -1,9 +1,9 @@
-import {Component, OnInit, Inject, Input} from 'angular2/core';
+import {Component, OnInit, Inject, Input} from '@angular/core';
 import {ApartmentService} from "./ApartmentService";
-import {FormBuilder, Validators, ControlGroup} from "angular2/common";
+import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 //import {DownloadService} from "../../services/DownloadService";
 import {AptDetailsComponent} from "./AptDetailsComponent";
-import {Http, Response, Headers} from 'angular2/http'
+import {Http, Response, Headers} from '@angular/http'
 
 @Component({
   selector: 'download',

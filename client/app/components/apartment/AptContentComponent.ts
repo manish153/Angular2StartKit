@@ -1,11 +1,11 @@
-import {Component, OnInit, Inject} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteParams} from "angular2/router";
+import {Component, OnInit, Inject} from '@angular/core';
+import {ROUTER_DIRECTIVES, RouteParams} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentService} from "./ApartmentService";
 import {SharedService} from "../../services/SharedService";
 import {UploadService} from "../../services/UploadService";
 import {DownloadService} from "../../services/DownloadService";
-import {Http} from 'angular2/http';
+import {Http} from '@angular/http';
 
 declare var saveAs: any;
 

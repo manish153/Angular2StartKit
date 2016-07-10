@@ -1,17 +1,49 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from "angular2/router";
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 
 @Component({
     selector: 'requests',
     styleUrls: ['../app/assets/app.css'],
-    template: `<h1>Request Page - work in progress </h1>
-    
-    <a [routerLink]="['../Dashboard']">Back to Dash</a>
+    template: `
+    <div mdl class="mdl-grid demo-content">
+     <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+       <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                <h2 class="mdl-card__title-text">Service Requests</h2>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+               Service Request from Residents 
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect">???</a>
+              </div>
+       </div>
+     </div>  
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+              <div class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                <h2 class="mdl-card__title-text">Create New Task</h2>
+              </div>
+              <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                Create New Tasks For Team Members 
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a [routerLink]="['../Createrequest']" class="mdl-button mdl-js-button mdl-js-ripple-effect">Create Service Request</a>
+                
+              </div>
+            </div>  
+          </div>  
+    </div>    
 
     `,
     directives: [ROUTER_DIRECTIVES]
 })
 
 export class RequestsComponent {
+
+	//isService: boolean = true;
     constructor() { }
+   
+    
+
 }

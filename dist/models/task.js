@@ -7,7 +7,8 @@ var TaskSchema = new Schema({
 	taskcreator:String,
 	createddate: String,
     assignedto: String,
-    taskstatus: String
+    taskstatus: String,
+    tasktype: String
  });
 
 module.exports = mongoose.model('Task', TaskSchema);

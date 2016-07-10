@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/add/operator/map'], function(exports_1, context_1) {
+System.register(['@angular/core', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -30,4 +30,4 @@ System.register(['angular2/core', 'rxjs/add/operator/map'], function(exports_1, 
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9zZXJ2aWNlcy9TaGFyZWRTZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztZQUtBO1lBRUMsQ0FBQztZQUhGO2dCQUFDLGlCQUFVLEVBQUU7OzZCQUFBO1lBQ2IseUNBRUUsQ0FBQSIsImZpbGUiOiJhcHAvc2VydmljZXMvU2hhcmVkU2VydmljZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7SHR0cCwgUmVzcG9uc2UsIEhlYWRlcnN9IGZyb20gJ2FuZ3VsYXIyL2h0dHAnXHJcbmltcG9ydCB7SW5qZWN0YWJsZX0gZnJvbSAnYW5ndWxhcjIvY29yZSdcclxuaW1wb3J0ICdyeGpzL2FkZC9vcGVyYXRvci9tYXAnO1xyXG5cclxuQEluamVjdGFibGUoKVxyXG5leHBvcnQgY2xhc3MgU2hhcmVkU2VydmljZSB7XHJcbiAgIHRlbXA6T2JqZWN0W11cclxuIH1cclxuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC9zZXJ2aWNlcy9TaGFyZWRTZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztZQUtBO1lBRUMsQ0FBQztZQUhGO2dCQUFDLGlCQUFVLEVBQUU7OzZCQUFBO1lBQ2IseUNBRUUsQ0FBQSIsImZpbGUiOiJhcHAvc2VydmljZXMvU2hhcmVkU2VydmljZS5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7SHR0cCwgUmVzcG9uc2UsIEhlYWRlcnN9IGZyb20gJ0Bhbmd1bGFyL2h0dHAnXHJcbmltcG9ydCB7SW5qZWN0YWJsZX0gZnJvbSAnQGFuZ3VsYXIvY29yZSdcclxuaW1wb3J0ICdyeGpzL2FkZC9vcGVyYXRvci9tYXAnO1xyXG5cclxuQEluamVjdGFibGUoKVxyXG5leHBvcnQgY2xhc3MgU2hhcmVkU2VydmljZSB7XHJcbiAgIHRlbXA6T2JqZWN0W11cclxuIH1cclxuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9

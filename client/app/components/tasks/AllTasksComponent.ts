@@ -1,5 +1,5 @@
-import {Component,OnInit} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from "angular2/router";
+import {Component,OnInit} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router,ROUTER_PROVIDERS} from "@angular/router-deprecated";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {ApartmentService} from "../apartment/ApartmentService";
 import {SharedService} from "../../services/SharedService";
@@ -85,7 +85,7 @@ import {SharedService} from "../../services/SharedService";
          </div>
     `,
     directives: [ROUTER_DIRECTIVES,MDL]
-    /*,providers: [TaskService]*/
+    //,providers: [ROUTER_PROVIDERS]
 })
 
 export class AllTasksComponent implements OnInit {
