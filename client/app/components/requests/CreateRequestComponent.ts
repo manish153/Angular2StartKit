@@ -3,6 +3,7 @@ import {ROUTER_DIRECTIVES,Router} from "@angular/router-deprecated";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {ApartmentService} from "../apartment/ApartmentService";
+import {SimpleNotificationsComponent,NotificationsService} from 'angular2-notifications';
 
 
 @Component({
@@ -21,7 +22,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
                     <label class="mdl-textfield__label" for="taskdesc">Description</label>
                   </div> <br/>
       
-                <br/><br/> <button [routerLink]="['../Requests']" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Cancel</button> 
+                <br/><br/> <button [routerLink]="['../Requests']" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Cancel</button> 
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
 
                 </form>          
@@ -38,10 +39,12 @@ import {ApartmentService} from "../apartment/ApartmentService";
               <div class="mdl-card__actions mdl-card--border">
                 <a [routerLink]="['../Requests']" class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Requests</a>
               </div>
-            </div>         
+            </div> 
+          <simple-notifications [options]="options"></simple-notifications>        
          </div>
     `,
-    directives: [ROUTER_DIRECTIVES, MDL]
+    directives: [ROUTER_DIRECTIVES, MDL,SimpleNotificationsComponent],
+    providers: [NotificationsService]
 })
 
 export class CreateRequestComponent implements OnInit {
@@ -51,16 +54,29 @@ export class CreateRequestComponent implements OnInit {
     //public dropdownValues= ["OPEN","CLOSED"];
     //public dropdownValues: Object[];
 
-    constructor(private apartmentService: ApartmentService,private router: Router) {
-    this.data = {};            
+    public options = {
+          timeOut: 5000,
+          lastOnBottom: true,
+          clickToClose: true,
+          maxLength: 0,
+          maxStack: 7,
+          showProgressBar: true,
+          pauseOnHover: true
+    };
+
+    constructor(private apartmentService: ApartmentService,private router: Router,private _service: NotificationsService) {
+    this.data = {};   
+             
     }
 
      ngOnInit() {
        //this.apartmentService.getUsersList().subscribe(res => this.dropdownValues = res);       
+
      }
 
     onSubmit(form) {
-    console.log(JSON.stringify(this.data));    
+    //console.log(JSON.stringify(this.data));
+    this._service.success('Request Created', 'Request Created');   
     this.apartmentService.postRequests(this.data).then(_=>this.router.navigate(['Requests']));   
     this.data = {};
     }

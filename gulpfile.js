@@ -51,6 +51,7 @@ var jsNPMDependencies = [
     'systemjs/dist/system.src.js',
     'rxjs/bundles/Rx.js',    
     'angular2-jwt/angular2-jwt.js',
+    'angular2-notifications/**/*.js',
     'file-saver/FileSaver.js',
     'zone.js/dist/zone.js',
     'reflect-metadata/Reflect.js'

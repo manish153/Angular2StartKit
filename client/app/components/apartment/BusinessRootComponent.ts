@@ -9,10 +9,10 @@ import {AptContentComponent} from "./AptContentComponent";
 
 
 @RouteConfig([
-    { path: '/', component: BusinessUnitComponent, as: 'BusinessUnit', useAsDefault: true },
-    { path: '/aptdetails', component: AptDetailsComponent, as: 'AptDetails' }, 
-    { path: '/apartment', component: ApartmentComponent, as: 'Apartment' },
-    { path: '/aptcontent', component: AptContentComponent, as: 'AptContent' }
+    { path: '/', component: BusinessUnitComponent, name: 'BusinessUnit', useAsDefault: true },
+    { path: '/aptdetails', component: AptDetailsComponent, name: 'AptDetails' }, 
+    { path: '/apartment', component: ApartmentComponent, name: 'Apartment' },
+    { path: '/aptcontent', component: AptContentComponent, name: 'AptContent' }
     
 ])
 

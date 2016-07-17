@@ -61,11 +61,12 @@
       //System.config({
        var packages = {        
           'app': {format: 'register', defaultExtension: 'js'},
-          
+          'angular2-notifications': { main: 'components.js', defaultExtension: 'js' }
         };
         var map = {
           'angular2-jwt' : 'libs/angular2-jwt/angular2-jwt.js',
-          '@angular': 'libs/@angular'
+          '@angular': 'libs/@angular',
+          'angular2-notifications': 'libs/angular2-notifications'
                  
         };
      // });
@@ -84,11 +85,11 @@
 
   // Individual files (~300 requests):
   function packIndex(pkgName) {
-    packages['@angular/'+pkgName] = { main: 'index.js', defaultExtension: 'js' };
+    packages['@angular/'+pkgName] = {main:'index.js', defaultExtension: 'js'};
   }
   // Bundled (~40 requests):  
   function packUmd(pkgName) {
-   packages['@angular/'+pkgName] = { main: pkgName + '.umd.js', defaultExtension: 'js' };
+   packages['@angular/'+pkgName] = {main:'/bundles/' + pkgName + '.umd.js', defaultExtension: 'js'};
    };
 
   // Most environments should use UMD; some (Karma) need the individual index files
