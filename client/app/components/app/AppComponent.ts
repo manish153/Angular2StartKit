@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate } from '@angular/router-deprecated';
 import {AuthHttp, AuthConfig, tokenNotExpired, AUTH_PROVIDERS} from 'angular2-jwt';
+import {SimpleNotificationsComponent,NotificationsService} from 'angular2-notifications';
 
 
 import {HomeComponent} from '../home/HomeComponent'
@@ -110,16 +111,27 @@ import {EditTaskComponent} from '../tasks/EditTaskComponent'
       </svg>
       
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <simple-notifications [options]="options"></simple-notifications>  
   </body>
 
     `,
-    directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent, MDL, AuthRouterOutlet],
-    providers: [AUTH_PROVIDERS]
+    directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent, MDL, AuthRouterOutlet,SimpleNotificationsComponent],
+    providers: [AUTH_PROVIDERS,NotificationsService]
 })
 
 
 export class AppComponent {
 
   constructor() { }
+
+      public options = {
+          timeOut: 5000,
+          lastOnBottom: true,
+          clickToClose: true,
+          maxLength: 0,
+          maxStack: 7,
+          showProgressBar: true,
+          pauseOnHover: true
+    };
 
 }

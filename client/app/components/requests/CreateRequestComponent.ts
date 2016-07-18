@@ -3,7 +3,7 @@ import {ROUTER_DIRECTIVES,Router} from "@angular/router-deprecated";
 import {MDL} from '../app/MaterialDesignLiteUpgradeElement';
 import {FormBuilder, Validators, ControlGroup} from "@angular/common";
 import {ApartmentService} from "../apartment/ApartmentService";
-import {SimpleNotificationsComponent,NotificationsService} from 'angular2-notifications';
+import {NotificationsService} from 'angular2-notifications';
 
 
 @Component({
@@ -39,46 +39,26 @@ import {SimpleNotificationsComponent,NotificationsService} from 'angular2-notifi
               <div class="mdl-card__actions mdl-card--border">
                 <a [routerLink]="['../Requests']" class="mdl-button mdl-js-button mdl-js-ripple-effect">View All Requests</a>
               </div>
-            </div> 
-          <simple-notifications [options]="options"></simple-notifications>        
+            </div>           
          </div>
     `,
-    directives: [ROUTER_DIRECTIVES, MDL,SimpleNotificationsComponent],
-    providers: [NotificationsService]
+    directives: [ROUTER_DIRECTIVES, MDL]
+    
 })
 
 export class CreateRequestComponent implements OnInit {
 
     data: any;
 
-    //public dropdownValues= ["OPEN","CLOSED"];
-    //public dropdownValues: Object[];
-
-    public options = {
-          timeOut: 5000,
-          lastOnBottom: true,
-          clickToClose: true,
-          maxLength: 0,
-          maxStack: 7,
-          showProgressBar: true,
-          pauseOnHover: true
-    };
-
     constructor(private apartmentService: ApartmentService,private router: Router,private _service: NotificationsService) {
     this.data = {};   
-             
     }
 
-     ngOnInit() {
-       //this.apartmentService.getUsersList().subscribe(res => this.dropdownValues = res);       
-
-     }
+    ngOnInit() {}
 
     onSubmit(form) {
-    //console.log(JSON.stringify(this.data));
-    this._service.success('Request Created', 'Request Created');   
+    this._service.success('Request Created', 'Request Created'); 
     this.apartmentService.postRequests(this.data).then(_=>this.router.navigate(['Requests']));   
     this.data = {};
     }
-
 }
