@@ -307,4 +307,38 @@ router.get('/api',authCheck, function(req, res) {
   })
 
 
+  router.route('/api/myrequest/:userEmail')    
+    .get(function(req, res) {
+        Task.find({$and:[{assignedto:req.params.userEmail.toLowerCase()},{tasktype:'request'}]}, function(err, task) {
+            if (err)
+                res.send(err);
+            res.json(task);
+        });
+  })  
+  
+  router.route('/api/adminrequest')    
+    .get(function(req, res) {
+        Task.find({tasktype:'request'}, function(err, task) {
+            if (err)
+                res.send(err);
+            res.json(task);
+        });
+  })
+
+  router.route('/api/convertrequest/:_id')  
+    .put(function(req, res) {
+        Task.findById(req.params._id, function(err, task) {
+            if (err)
+                res.send(err);
+            task.tasktype = 'task'; 
+            task.assignedto = req.body.assignedto; 
+            task.taskstatus = 'OPEN';           
+            task.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({ message: 'task updated!' });
+            });
+        });
+    })    
+
 app.use('/', router);

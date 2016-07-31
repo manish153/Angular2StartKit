@@ -106,5 +106,25 @@ export class ApartmentService {
           });  
     }
 
+    getMyRequests(userEmail: string) { 
+        //console.log('getMyTask' +userEmail);
+        return this.http.get(`./api/myrequest/${userEmail}`).map((res: Response) => res.json());
+    }
+
+    getAdminRequests(){
+        return this.http.get('./api/adminrequest').map((res: Response) => res.json());
+    }
+
+    postConvertToTask(data:any) { 
+         return new Promise((resolve,reject)=> {
+          this.http.put(`./api/convertrequest/${data._id}`,
+          JSON.stringify(data),{ 
+             headers: new Headers({'Content-Type':'application/json'})
+        })
+        .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error))
+      });   
+    }
+
+
 
 }

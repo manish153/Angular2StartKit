@@ -23,7 +23,7 @@ import {NotificationsService} from 'angular2-notifications';
                   </div> <br/>
       
                 <br/><br/> <button [routerLink]="['../Requests']" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Cancel</button> 
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Service Request</button>
 
                 </form>          
           </div>       
@@ -49,7 +49,6 @@ import {NotificationsService} from 'angular2-notifications';
 export class CreateRequestComponent implements OnInit {
 
     data: any;
-
     constructor(private apartmentService: ApartmentService,private router: Router,private _service: NotificationsService) {
     this.data = {};   
     }
