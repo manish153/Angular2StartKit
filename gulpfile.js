@@ -46,7 +46,7 @@ gulp.task('build:server', function() {
   jsNPMDependencies, sometimes order matters here! so be careful!
 */
 var jsNPMDependencies = [
-    '@angular/**/index.js',
+    '@angular/**/*.js',
     '@angular/**/*.umd.js',
     'systemjs/dist/system.src.js',
     'rxjs/bundles/Rx.js',    
