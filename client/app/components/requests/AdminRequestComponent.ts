@@ -1,10 +1,10 @@
 import {Component,OnInit} from '@angular/core';
 import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
 import {ApartmentService} from "../apartment/ApartmentService";
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'adminrequests',
-    styleUrls: ['../app/assets/app.css'],
     template: `
        <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
         <div *ngFor="#request of adminrequests" class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
@@ -33,7 +33,7 @@ export class AdminRequestComponent implements OnInit{
   public adminrequests: Object[];
   public dropdownValues: Object[];
   data: any;
-  constructor(private apartmentService: ApartmentService) { }
+  constructor(private apartmentService: ApartmentService,private _service: NotificationsService) { }
    
   ngOnInit() {
     this.apartmentService.getAdminRequests().subscribe(res => this.adminrequests = res);
@@ -42,10 +42,11 @@ export class AdminRequestComponent implements OnInit{
 
     onClickAssign(request) {
         this.data = request;  
-        console.log(JSON.stringify(this.data));
+        //console.log(JSON.stringify(this.data));
         this.apartmentService.postConvertToTask(this.data).then(() => {     
         var index = this.adminrequests.findIndex((request) => this.data ==request);
         this.adminrequests.splice(index, 1);
+        this._service.success('Task Created', 'Task Created'); 
         });    
     }   
 }
