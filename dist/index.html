@@ -61,13 +61,12 @@
       //System.config({
        var packages = {        
           'app': {format: 'register', defaultExtension: 'js'},
-          'angular2-notifications': { main: 'components.js', defaultExtension: 'js' }
+          'angular2-notifications': { main: 'components.js', defaultExtension: 'js' }          
         };
         var map = {
           'angular2-jwt' : 'libs/angular2-jwt/angular2-jwt.js',
           '@angular': 'libs/@angular',
-          'angular2-notifications': 'libs/angular2-notifications'
-                 
+          'angular2-notifications': 'libs/angular2-notifications'                          
         };
      // });
 
@@ -79,7 +78,7 @@
     'platform-browser',
     'platform-browser-dynamic',
     'router',
-    'router-deprecated',     
+    'router-deprecated',
     'upgrade'
   ];
 
@@ -88,10 +87,10 @@
     packages['@angular/'+pkgName] = {main:'index.js', defaultExtension: 'js'};
   }
   // Bundled (~40 requests):  
-  function packUmd(pkgName) {
-   packages['@angular/'+pkgName] = {main:'bundles/' + pkgName + '.umd.js', defaultExtension: 'js'};
-   };
-
+    function packUmd(pkgName) {
+    packages['@angular/'+pkgName] = {main:'bundles/' + pkgName + '.umd.js', defaultExtension: 'js'};
+    };
+  
   // Most environments should use UMD; some (Karma) need the individual index files
   var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
   // Add package entries for angular packages
