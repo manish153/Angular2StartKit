@@ -6,11 +6,11 @@
 var core_private_1 = require('../../core_private');
 var lifecycle_annotations_impl_1 = require('./lifecycle_annotations_impl');
 var lifecycle_annotations_impl_2 = require('./lifecycle_annotations_impl');
-exports.routerCanDeactivate = lifecycle_annotations_impl_2.routerCanDeactivate;
 exports.routerCanReuse = lifecycle_annotations_impl_2.routerCanReuse;
+exports.routerCanDeactivate = lifecycle_annotations_impl_2.routerCanDeactivate;
 exports.routerOnActivate = lifecycle_annotations_impl_2.routerOnActivate;
-exports.routerOnDeactivate = lifecycle_annotations_impl_2.routerOnDeactivate;
 exports.routerOnReuse = lifecycle_annotations_impl_2.routerOnReuse;
+exports.routerOnDeactivate = lifecycle_annotations_impl_2.routerOnDeactivate;
 /**
  * Defines route lifecycle hook `CanActivate`, which is called by the router to determine
  * if a component can be instantiated as part of a navigation.

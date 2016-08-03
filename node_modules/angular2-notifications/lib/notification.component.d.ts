@@ -1,7 +1,7 @@
-import { DomSanitizationService, SafeHtml } from '@angular/platform-browser';
 import { OnInit, OnDestroy } from "@angular/core";
 import { Notification } from "./notification";
 import { NotificationsService } from "./notifications.service";
+import { DomSanitizationService, SafeHtml } from '@angular/platform-browser';
 export declare class NotificationComponent implements OnInit, OnDestroy {
     private _service;
     private _sanitizer;
@@ -12,6 +12,7 @@ export declare class NotificationComponent implements OnInit, OnDestroy {
     maxLength: number;
     showProgressBar: boolean;
     theClass: string;
+    theHtml: any;
     rtl: boolean;
     overrides: any;
     progressWidth: number;

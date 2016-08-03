@@ -1,6 +1,6 @@
-import { PromiseWrapper } from '../src/facade/async';
 import { StringMapWrapper } from '../src/facade/collection';
-import { isBlank, isPresent, normalizeBlank } from '../src/facade/lang';
+import { isPresent, isBlank, normalizeBlank } from '../src/facade/lang';
+import { PromiseWrapper } from '../src/facade/async';
 /**
  * `RouteParams` is an immutable map of parameters for the given route
  * based on the url matcher and optional parameters for that route.
@@ -174,7 +174,7 @@ export class Instruction {
     }
     /** @internal */
     _stringifyPathMatrixAux() {
-        if (isBlank(this.component) && isBlank(this.urlPath)) {
+        if (isBlank(this.component)) {
             return '';
         }
         return this.urlPath + this._stringifyMatrixParams() + this._stringifyAux();
@@ -274,7 +274,7 @@ export class ComponentInstruction {
     /**
      * @internal
      */
-    constructor(urlPath, urlParams, data, componentType /** TODO #9100 */, terminal, specificity, params = null, routeName) {
+    constructor(urlPath, urlParams, data, componentType, terminal, specificity, params = null, routeName) {
         this.urlPath = urlPath;
         this.urlParams = urlParams;
         this.componentType = componentType;

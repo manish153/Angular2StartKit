@@ -12,12 +12,11 @@ export class RouteConfig {
 }
 /* @ts2dart_const */
 export class AbstractRoute {
-    constructor({ name, useAsDefault, path, regex, regex_group_names, serializer, data }) {
+    constructor({ name, useAsDefault, path, regex, serializer, data }) {
         this.name = name;
         this.useAsDefault = useAsDefault;
         this.path = path;
         this.regex = regex;
-        this.regex_group_names = regex_group_names;
         this.serializer = serializer;
         this.data = data;
     }
@@ -46,13 +45,12 @@ export class AbstractRoute {
  * @ts2dart_const
  */
 export class Route extends AbstractRoute {
-    constructor({ name, useAsDefault, path, regex, regex_group_names, serializer, data, component }) {
+    constructor({ name, useAsDefault, path, regex, serializer, data, component }) {
         super({
             name: name,
             useAsDefault: useAsDefault,
             path: path,
             regex: regex,
-            regex_group_names: regex_group_names,
             serializer: serializer,
             data: data
         });
@@ -82,13 +80,12 @@ export class Route extends AbstractRoute {
  * @ts2dart_const
  */
 export class AuxRoute extends AbstractRoute {
-    constructor({ name, useAsDefault, path, regex, regex_group_names, serializer, data, component }) {
+    constructor({ name, useAsDefault, path, regex, serializer, data, component }) {
         super({
             name: name,
             useAsDefault: useAsDefault,
             path: path,
             regex: regex,
-            regex_group_names: regex_group_names,
             serializer: serializer,
             data: data
         });
@@ -121,13 +118,12 @@ export class AuxRoute extends AbstractRoute {
  * @ts2dart_const
  */
 export class AsyncRoute extends AbstractRoute {
-    constructor({ name, useAsDefault, path, regex, regex_group_names, serializer, data, loader }) {
+    constructor({ name, useAsDefault, path, regex, serializer, data, loader }) {
         super({
             name: name,
             useAsDefault: useAsDefault,
             path: path,
             regex: regex,
-            regex_group_names: regex_group_names,
             serializer: serializer,
             data: data
         });
@@ -158,13 +154,12 @@ export class AsyncRoute extends AbstractRoute {
  * @ts2dart_const
  */
 export class Redirect extends AbstractRoute {
-    constructor({ name, useAsDefault, path, regex, regex_group_names, serializer, data, redirectTo }) {
+    constructor({ name, useAsDefault, path, regex, serializer, data, redirectTo }) {
         super({
             name: name,
             useAsDefault: useAsDefault,
             path: path,
             regex: regex,
-            regex_group_names: regex_group_names,
             serializer: serializer,
             data: data
         });

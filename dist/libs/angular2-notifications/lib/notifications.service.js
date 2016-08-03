@@ -13,20 +13,16 @@ var NotificationsService = (function () {
     function NotificationsService() {
         this.emiter = new core_1.EventEmitter();
     }
-    NotificationsService.prototype.set = function (notification, to) {
-        notification.id = notification.override && notification.override.id ? notification.override.id : Math.random().toString(36).substring(3);
-        this.emiter.emit({ command: "set", notification: notification, add: to });
-        return notification;
-    };
+    NotificationsService.prototype.set = function (notification, to) { this.emiter.emit({ command: "set", notification: notification, add: to }); };
     ;
     NotificationsService.prototype.getChangeEmitter = function () { return this.emiter; };
-    NotificationsService.prototype.success = function (title, content, override) { return this.set({ title: title, content: content, type: "success", override: override }, true); };
-    NotificationsService.prototype.error = function (title, content, override) { return this.set({ title: title, content: content, type: "error", override: override }, true); };
-    NotificationsService.prototype.alert = function (title, content, override) { return this.set({ title: title, content: content, type: "alert", override: override }, true); };
-    NotificationsService.prototype.info = function (title, content, override) { return this.set({ title: title, content: content, type: "info", override: override }, true); };
-    NotificationsService.prototype.bare = function (title, content, override) { return this.set({ title: title, content: content, type: "bare", override: override }, true); };
-    NotificationsService.prototype.create = function (title, content, type, override) { return this.set({ title: title, content: content, type: type, override: override }, true); };
-    NotificationsService.prototype.html = function (html, type, override) { return this.set({ html: html, type: type, override: override, title: null, content: null }, true); };
+    NotificationsService.prototype.success = function (title, content, override) { this.set({ title: title, content: content, type: "success", override: override }, true); };
+    NotificationsService.prototype.error = function (title, content, override) { this.set({ title: title, content: content, type: "error", override: override }, true); };
+    NotificationsService.prototype.alert = function (title, content, override) { this.set({ title: title, content: content, type: "alert", override: override }, true); };
+    NotificationsService.prototype.info = function (title, content, override) { this.set({ title: title, content: content, type: "info", override: override }, true); };
+    NotificationsService.prototype.bare = function (title, content, override) { this.set({ title: title, content: content, type: "bare", override: override }, true); };
+    NotificationsService.prototype.create = function (title, content, type, override) { this.set({ title: title, content: content, type: type, override: override }, true); };
+    NotificationsService.prototype.html = function (html, type, override) { this.set({ html: html, type: type, override: override, title: null, content: null }, true); };
     NotificationsService.prototype.remove = function (id) {
         if (id)
             this.emiter.emit({ command: "clean", id: id });

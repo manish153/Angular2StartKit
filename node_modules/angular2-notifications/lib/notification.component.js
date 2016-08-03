@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var platform_browser_1 = require('@angular/platform-browser');
 var core_1 = require("@angular/core");
 var notifications_service_1 = require("./notifications.service");
 var max_pipe_1 = require("./max.pipe");
 var icons_1 = require("./icons");
+var platform_browser_1 = require('@angular/platform-browser');
 var NotificationComponent = (function () {
     function NotificationComponent(_service, _sanitizer) {
         var _this = this;
@@ -40,6 +40,7 @@ var NotificationComponent = (function () {
         if (this.timeOut !== 0)
             this.startTimeOut();
         this.safeSvg = this._sanitizer.bypassSecurityTrustHtml(this.icons[this.item.type]);
+        console.warn(this.safeSvg);
     };
     NotificationComponent.prototype.startTimeOut = function () {
         this.steps = this.timeOut / 10;

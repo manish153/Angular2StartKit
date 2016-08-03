@@ -10,18 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { PromiseWrapper } from '../src/facade/async';
 import { ListWrapper, Map, StringMapWrapper } from '../src/facade/collection';
+import { PromiseWrapper } from '../src/facade/async';
 import { isPresent, isArray, isBlank, isType, isString, isStringMap, Type, StringWrapper, Math, getTypeNameForDebugging } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
-import { Injectable, Inject, OpaqueToken } from '@angular/core';
+import { Injectable, Inject, OpaqueToken, reflector } from '@angular/core';
 import { RouteConfig, Route, AuxRoute } from './route_config/route_config_impl';
 import { PathMatch, RedirectMatch } from './rules/rules';
 import { RuleSet } from './rules/rule_set';
 import { ResolvedInstruction, RedirectInstruction, UnresolvedInstruction, DefaultInstruction } from './instruction';
 import { normalizeRouteConfig, assertComponentExists } from './route_config/route_config_normalizer';
 import { parser, convertUrlParamsToArray } from './url_parser';
-import { reflector } from '../core_private';
 var _resolveToNull = PromiseWrapper.resolve(null);
 // A LinkItemArray is an array, which describes a set of routes
 // The items in the array are found in groups:
@@ -439,7 +438,7 @@ function compareSpecificityStrings(a, b) {
     }
     return a.length - b.length;
 }
-function assertTerminalComponent(component /** TODO #9100 */, path /** TODO #9100 */) {
+function assertTerminalComponent(component, path) {
     if (!isType(component)) {
         return;
     }

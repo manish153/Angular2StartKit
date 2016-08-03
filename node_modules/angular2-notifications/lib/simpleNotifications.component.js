@@ -58,6 +58,7 @@ var SimpleNotificationsComponent = (function () {
     };
     SimpleNotificationsComponent.prototype.add = function (item) {
         item.createdOn = new Date();
+        item.id = Math.random().toString(36).substring(3);
         var toBlock = this.preventLastDuplicates || this.preventDuplicates ? this.block(item) : false;
         this.lastNotificationCreated = item;
         if (!toBlock) {
@@ -75,7 +76,7 @@ var SimpleNotificationsComponent = (function () {
         }
     };
     SimpleNotificationsComponent.prototype.block = function (item) {
-        var checkHtml = function (checker) { return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false; }, checkStandard = function (checker) { return checker.type === item.type && checker.title === item.title && checker.content === item.content; }, toCheck = item.html ? checkHtml : checkStandard;
+        var toCheck = item.html ? checkHtml : checkStandard;
         if (this.preventDuplicates && this.notifications.length > 0)
             for (var i = 0; i < this.notifications.length; i++)
                 if (toCheck(this.notifications[i]))
@@ -95,6 +96,12 @@ var SimpleNotificationsComponent = (function () {
             return toCheck(comp);
         }
         return false;
+        function checkHtml(checker) {
+            return checker.html ? checker.type === item.type && checker.title === item.title && checker.content === item.content && checker.html === item.html : false;
+        }
+        function checkStandard(checker) {
+            return checker.type === item.type && checker.title === item.title && checker.content === item.content;
+        }
     };
     SimpleNotificationsComponent.prototype.attachChanges = function () {
         var _this = this;
@@ -127,10 +134,8 @@ var SimpleNotificationsComponent = (function () {
         if (doDelete)
             this.notifications.splice(indexOfDelete, 1);
     };
-    SimpleNotificationsComponent.prototype.ngOnDestroy = function () {
-        if (this.listener)
-            this.listener.unsubscribe();
-    };
+    SimpleNotificationsComponent.prototype.ngOnDestroy = function () { if (this.listener)
+        this.listener.unsubscribe(); };
     SimpleNotificationsComponent = __decorate([
         core_1.Component({
             selector: "simple-notifications",
