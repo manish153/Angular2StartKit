@@ -1,6 +1,7 @@
 import {Http, Response, Headers} from '@angular/http'
 import {Injectable} from '@angular/core'
 import 'rxjs/add/operator/map';
+import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export class ApartmentService {
@@ -38,8 +39,12 @@ export class ApartmentService {
         return this.http.get(`./api/apartments/getprofile/${userEmail}`).map((res: Response) => res.json());
     }
 
-    getUsersList(){        
-        return this.http.get('/api/getusers').map((res: Response) => res.json());   
+    // getUsersList(){        
+    //     return this.http.get('/api/getusers').map((res: Response) => res.json());   
+    // }
+   
+    getInternalUsersList(){        
+        return this.http.get('/api/getinternalusers').map((res: Response) => res.json());   
     }
 
     updateProfile(data: any){
@@ -125,6 +130,34 @@ export class ApartmentService {
       });   
     }
 
+     editApt(data: any) {
+        return new Promise((resolve,reject)=> {
+         this.http.put(`./api/editapt/${data._id}`,
+            JSON.stringify(data), {
+                headers: new Headers({ 'Content-Type': 'application/json' })
+            })
+            .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error));
+          });  
+    }
+
+    searchApt(aptID : string){
+      console.log('Inside searchApt ' +aptID)
+      return this.http.get(`./api/apartments/search/${aptID}`).map((res: Response) => res.json());
+    //   return new Promise((resolve,reject)=> {
+    //      this.http.get(`./api/apartments/search/${aptID}`)
+    //         .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error));
+    //  console.log(resolve);
+        //   });  
+    }
 
 
+    searchApt2(aptID : string):Observable<Object[]>{
+      console.log('Inside searchApt ' +aptID)
+      return this.http.get(`./api/apartments/search/${aptID}`).map((res: Response) => res.json());
+    //   return new Promise((resolve,reject)=> {
+    //      this.http.get(`./api/apartments/search/${aptID}`)
+    //         .map((res: Response) => res.json()).subscribe(data => {resolve(data)}, error => reject(error));
+    //  console.log(resolve);
+        //   });  
+    }
 }

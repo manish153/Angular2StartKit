@@ -17,7 +17,7 @@ import {NotificationsService} from 'angular2-notifications';
               </div>
               <div class="mdl-card__actions mdl-card--border">
                  <select [(ngModel)]="request.assignedto">
-                      <option *ngFor="#assign of dropdownValues" [ngValue]="assign.userEmail">{{assign.userEmail}}</option>
+                      <option *ngFor="#assign of dropdownValues" [ngValue]="assign.Email">{{assign.Email}}</option>
                   </select>
                   <a class="mdl-button mdl-js-button mdl-js-ripple-effect" (click)="onClickAssign(request)">Assign</a>
               </div>     
@@ -37,12 +37,12 @@ export class AdminRequestComponent implements OnInit{
    
   ngOnInit() {
     this.apartmentService.getAdminRequests().subscribe(res => this.adminrequests = res);
-    this.apartmentService.getUsersList().subscribe(res => this.dropdownValues = res);       
+    this.apartmentService.getInternalUsersList().subscribe(res => this.dropdownValues = res);
+    console.log(JSON.stringify(this.data));       
   }
 
     onClickAssign(request) {
         this.data = request;  
-        //console.log(JSON.stringify(this.data));
         this.apartmentService.postConvertToTask(this.data).then(() => {     
         var index = this.adminrequests.findIndex((request) => this.data ==request);
         this.adminrequests.splice(index, 1);

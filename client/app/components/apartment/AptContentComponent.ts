@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {ROUTER_DIRECTIVES, RouteParams} from "@angular/router-deprecated";
+import {ROUTER_DIRECTIVES, RouteParams,Router} from "@angular/router-deprecated";
 import {DashboardComponent} from "../app/DashboardComponent";
 import {ApartmentService} from "./ApartmentService";
 import {SharedService} from "../../services/SharedService";
@@ -23,11 +23,17 @@ declare var saveAs: any;
            <div class="mdl-textfield mdl-js-textfield">
 
                <label  *ngIf="!isEdit" (click)="isEdit=true">APT ID: {{data.aptID}} </label> <br/>
-               <label  *ngIf="isEdit">APT ID: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text" [(ngModel)]="data.aptID">
+               <label  *ngIf="isEdit" (click)="isEdit=true">APT ID: {{data.aptID}} </label> <br/>
                <label  *ngIf="!isEdit" (click)="isEdit=true">Apt Type: {{data.aptType}} </label> <br/>
-               <label  *ngIf="isEdit">Apt Type: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.aptType">
+               <label  *ngIf="isEdit" (click)="isEdit=true">Apt Type: {{data.aptType}} </label> <br/>
                <label  *ngIf="!isEdit" (click)="isEdit=true">Business Unit: {{data.BusinessUnit}} </label> <br/>
-               <label  *ngIf="isEdit">Business Unit: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.BusinessUnit">
+               <label  *ngIf="isEdit" (click)="isEdit=true">Business Unit: {{data.BusinessUnit}} </label> <br/>
+               <label  *ngIf="!isEdit" (click)="isEdit=true">Last Payment Date: {{data.lastPaymentDate}} </label> <br/>
+               <label  *ngIf="isEdit" (click)="isEdit=true">Last Payment Date: {{data.lastPaymentDate}} </label> <br/>               
+               <label  *ngIf="!isEdit" (click)="isEdit=true">Next Payment Date: {{data.nextPaymentDate}} </label> <br/>
+               <label  *ngIf="isEdit" (click)="isEdit=true">Next Payment Date: {{data.nextPaymentDate}} </label> <br/>               
+               <label  *ngIf="!isEdit" (click)="isEdit=true">Payment Method: {{data.paymentMethod}} </label> <br/>
+               <label  *ngIf="isEdit" (click)="isEdit=true">Payment Method: {{data.paymentMethod}} </label> <br/>               
                <label  *ngIf="!isEdit" (click)="isEdit=true">Apt Description: {{data.aptDesc}} </label> <br/>
                <label  *ngIf="isEdit">Apt Description: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.aptDesc">
                <label  *ngIf="!isEdit" (click)="isEdit=true">Apt Address: {{data.aptAddress}} </label> <br/>
@@ -56,12 +62,7 @@ declare var saveAs: any;
                <label  *ngIf="isEdit">Secondary DOB: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.secondaryResidentDOB">
                <label  *ngIf="!isEdit" (click)="isEdit=true">Rent $: {{data.rentAmount}} </label> <br/>
                <label  *ngIf="isEdit">Rent $: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.rentAmount">
-               <label  *ngIf="!isEdit" (click)="isEdit=true">Last Payment Date: {{data.lastPaymentDate}} </label> <br/>
-               <label  *ngIf="isEdit">Last Payment Date: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.lastPaymentDate">
-               <label  *ngIf="!isEdit" (click)="isEdit=true">Next Payment Date: {{data.nextPaymentDate}} </label> <br/>
-               <label  *ngIf="isEdit">Next Payment Date: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.nextPaymentDate">
-               <label  *ngIf="!isEdit" (click)="isEdit=true">Payment Method: {{data.paymentMethod}} </label> <br/>
-               <label  *ngIf="isEdit">Payment Method: </label> <input class="mdl-textfield__input" *ngIf="isEdit" (keydown.enter)="isEdit=false" type="text"  [(ngModel)]="data.paymentMethod">
+  
             </div> <br/><br/>
 
               <button *ngIf="isEdit" (click)="isEdit=false" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" name="cancel">cancel</button>    
@@ -113,7 +114,7 @@ export class AptContentComponent implements OnInit {
     filesToUpload: Array<File>;
     isEdit: boolean = false;
 
-    constructor(private apartmentService: ApartmentService, private sharedService: SharedService, params: RouteParams, private uploadService: UploadService, private http: Http) {
+    constructor(private apartmentService: ApartmentService, private sharedService: SharedService, params: RouteParams, private uploadService: UploadService, private http: Http,private router: Router) {
         this.filesToUpload = [];
         this.http = http;
     }
@@ -163,6 +164,8 @@ export class AptContentComponent implements OnInit {
     }
 
     onSubmit(){
-      console.log('submit button')
+      console.log('submit button ' + this.data._id)
+      this.apartmentService.editApt(this.data).then(_=>this.router.navigate(['Apartment']));
+      
     }
 }

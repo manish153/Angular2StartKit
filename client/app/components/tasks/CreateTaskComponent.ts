@@ -22,7 +22,7 @@ import {ApartmentService} from "../apartment/ApartmentService";
                     <label class="mdl-textfield__label" for="taskdesc">Task Description</label>
                   </div> <br/>
                  <select [(ngModel)]="data.assignedto">
-                      <option *ngFor="#assign of dropdownValues" [ngValue]="assign.userEmail">{{assign.userEmail}}</option>
+                      <option *ngFor="#assign of dropdownValues" [ngValue]="assign.Email">{{assign.Email}}</option>
                   </select>
       
                 <br/><br/>  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Create Task</button>
@@ -98,7 +98,7 @@ export class CreateTaskComponent implements OnInit {
     }
 
      ngOnInit() {
-       this.apartmentService.getUsersList().subscribe(res => this.dropdownValues = res);       
+       this.apartmentService.getInternalUsersList().subscribe(res => this.dropdownValues = res);       
      }
 
     onSubmit(form) {

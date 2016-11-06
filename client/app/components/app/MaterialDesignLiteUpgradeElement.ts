@@ -11,5 +11,6 @@ export class MDL implements AfterViewInit {
 
     ngAfterViewInit() {
         componentHandler.upgradeAllRegistered();
-    }
+        }
+
 }

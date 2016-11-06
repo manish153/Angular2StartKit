@@ -49,13 +49,15 @@ var jsNPMDependencies = [
 
     'systemjs/dist/system.src.js',
     'rxjs/bundles/Rx.js', 
-    '@angular/**/*.js',
+    '@angular/**/index.js',
     '@angular/**/*.umd.js',   
     'angular2-jwt/angular2-jwt.js',
     'angular2-notifications/**/*.js',
     'file-saver/FileSaver.js',
     'zone.js/dist/zone.js',
-    'reflect-metadata/Reflect.js'
+    'reflect-metadata/Reflect.js',
+    'chart.js/dist/Chart.js',
+    'ng2-charts/ng2-charts.js'
 ]
 
 gulp.task('build:index', function() {

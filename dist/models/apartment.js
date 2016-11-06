@@ -7,7 +7,6 @@ var ApartmentSchema = new Schema({
 	BusinessUnit:String,
     aptID: String,
     aptType: String,
-    BusinessUnit: String,
     aptDesc: String,
     aptAddress: String,
     aptStatus: String,
@@ -29,4 +28,5 @@ var ApartmentSchema = new Schema({
 
  });
 
+ApartmentSchema.index({aptID:'text'});
 module.exports = mongoose.model('Apartment', ApartmentSchema);
