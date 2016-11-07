@@ -1,4 +1,4 @@
-import {Component, Output} from '@angular/core';
+import {Component, Output,EventEmitter} from '@angular/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES, CanActivate} from '@angular/router-deprecated';
 import {HomeComponent} from '../home/HomeComponent'
 import {DashboardComponent} from './DashboardComponent'
@@ -28,7 +28,7 @@ import {AuthService} from '../../services/AuthService'
         <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
           
           <a *ngIf="isloggedIn" class="mdl-navigation__link" [routerLink]="['./Dashboard']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">dashboard</i>Dashboard</a>          
-          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Tasks']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>My Tasks</a>
+          <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Tasks']" (click)="clearSearch()"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">assignment</i>My Tasks</a>
           <a *ngIf="isloggedIn && !isAdmin" class="mdl-navigation__link" [routerLink]="['./Requests']" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
           <a *ngIf="isAdmin && isloggedIn" class="mdl-navigation__link" [routerLink]="['./Adminrequest']" ><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Service Requests</a>
           <a *ngIf="isloggedIn && !isAdmin" class="mdl-navigation__link" [routerLink]="['./Payments']"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Payments</a>
@@ -46,6 +46,8 @@ import {AuthService} from '../../services/AuthService'
 })
 
 export class SidebarComponent {
+
+  @Output() sidebarClicked = new EventEmitter<boolean>();
 
   user = JSON.parse(localStorage.getItem('profile'));
   isAdmin: boolean = false;
@@ -65,11 +67,14 @@ export class SidebarComponent {
   }
 
   logout() {
-    //this.user = this.service.profileUpdated$.subscribe(profile => { 
-    //this.user = profile})
     this.user = 'user@example.com';
     this.isAdmin = false;
     this.isloggedIn = false;
     this.service.logout();
+  }
+
+  clearSearch(event){
+    this.sidebarClicked.emit(true);
+    
   }
 } 

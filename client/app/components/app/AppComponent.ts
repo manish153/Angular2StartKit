@@ -57,11 +57,11 @@ import {AptSearchComponent} from '../apartment/AptSearchComponent'
   template: `
     <body>
     <div mdl class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-      <app-header mdl class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600"></app-header>
-      <app-sidebar class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <app-header mdl class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600" [(hideme)] = "temp"></app-header>
+      <app-sidebar class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50"  (sidebarClicked)="temp = $event">
       </app-sidebar>
       <main class="mdl-layout__content mdl-color--grey-100">
-         
+               
          <auth-router-outlet></auth-router-outlet>
         
       </main>
@@ -70,6 +70,7 @@ import {AptSearchComponent} from '../apartment/AptSearchComponent'
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
     <simple-notifications [options]="options"></simple-notifications>  
   </body>
+  
 
     `,
     directives: [ROUTER_DIRECTIVES, SidebarComponent, HeaderComponent, MDL, AuthRouterOutlet,SimpleNotificationsComponent],
@@ -78,6 +79,8 @@ import {AptSearchComponent} from '../apartment/AptSearchComponent'
 
 
 export class AppComponent {
+
+  temp:boolean=false;
 
   constructor() { }
 
@@ -90,8 +93,4 @@ export class AppComponent {
           showProgressBar: true,
           pauseOnHover: true
     };
-
-
-    
-
 }

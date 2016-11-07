@@ -1,4 +1,4 @@
-import {Component,ChangeDetectorRef} from '@angular/core';
+import {Component,ChangeDetectorRef,Input,Output,EventEmitter} from '@angular/core';
 import {MDL} from './MaterialDesignLiteUpgradeElement';
 import {ApartmentService} from "../apartment/ApartmentService";
 import {Router} from "@angular/router-deprecated";
@@ -9,7 +9,7 @@ import {AptSearchComponent} from "../apartment/AptSearchComponent";
 @Component({
     selector: 'app-header',
     /*template: '<router-outlet></router-outlet>',*/
-     directives: [AptSearchComponent],
+    directives: [AptSearchComponent],
     template: `
     <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Angular2 Application</span>
@@ -33,27 +33,29 @@ import {AptSearchComponent} from "../apartment/AptSearchComponent";
             <li class="mdl-menu__item">Legal information</li>
           </ul>
         </div>
-     <aptsearch *ngIf="apartment" [model]="apartment"></aptsearch>    
-    `,
-     /*  directives: [ MDL ]*/
+        <div>
+     <aptsearch *ngIf="apartment && !hideme" [model]="apartment"></aptsearch>
+      </div>    
+    `
 })
 
-export class HeaderComponent {
+export class HeaderComponent{
+
+  @Input() hideme:boolean = false;
+  @Output() hidemeChange = new EventEmitter();
 
   public apartment: string;
     
      constructor(private apartmentService: ApartmentService,private router: Router,private sharedService: SharedService) { 
        this.apartmentService=apartmentService;
-       this.sharedService=sharedService;
+       this.sharedService=sharedService;  
      }
-
-     
+    
      Search(event){
+       this.hideme = false;
+       this.hidemeChange.emit(false);
        console.log('Search Enter Submitted ' + event.target.value);
        this.apartment = event.target.value;
-       this.router.navigate(['AptSearch']);     
-      //  this.apartmentService.searchApt2(event.target.value).subscribe(res => {this.sharedService.temp = res 
-      //   console.log(this.sharedService.temp)
-      //   this.router.navigate(['AptSearch'])});         
+       this.router.navigate(['AptSearch']);          
      }
 }
